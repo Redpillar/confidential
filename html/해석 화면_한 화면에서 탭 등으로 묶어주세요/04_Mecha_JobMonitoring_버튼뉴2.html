@@ -1,0 +1,495 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="../../css/common2.css" />
+	<link rel="stylesheet" href="../../css/main2.css" />
+	<link rel="stylesheet" href="../../css/ko.css" />
+	<style></style>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="../../js/ko.js"></script>
+	<script type="text/javascript" src="../../js/answer_common.js"></script>
+	<script>
+		$(function(){
+			lnbapp();/* 퍼블 관련 lnb셋팅*/
+		});
+	</script>
+</head>
+<body onClick="fn_Click_remove(this)" onResize="fn_foldRe(this)">
+	<!-- lnb -->
+	<div id="lnb_wrap" class=""></div>
+	<!-- // lnb -->
+	<!-- wrap -->
+	<div id="sub_wrap">
+		<div class="sub_innerWrap">
+			<!-- top -->
+			<div class="subTop">
+				<h2>Job Monitoring</h2>
+				<div class="subTop_rightbox">
+					<a href="javascript:;" class="home">Home</a>  >  Solution  >  <a href="javascript:;">PreDS Mecha</a>  >  Module  >  <span class="tc1">Run Simulation</span>
+					<span class="person_tooltip">
+						<div class="pt_wrap">
+							<div class="pt_wrapCon">
+								<h4>해석담당자</h4>
+								<p>홍길동 연구원(CAE팀)<br />+82-31-8000-9876</p>
+							</div>
+							<a href="javascript:;" class="pt_btn">Manual.pdf</a>
+						</div>
+					</span>
+				</div>
+			</div>
+			<!-- // top -->
+			<!-- 조건검색 -->
+			<div class="sub_selBox mt30">
+				<div class="sub_sbLayerBox">
+					<ul class="sub_sblb_wrap box5">
+						<!-- box1 -->
+						<li>
+							<dl class="sub_dtdd">
+								<dt class="dtype_block">
+									User
+								</dt>
+								<dd class="dtype_block">
+									<div class="sub_txtBt sub_dsel" style="width: 100%;">
+											<input class="sub_dsel_in" id="ip_user" style="width: calc(100% - 24px);" onkeypress="" type="text">
+											<a title="user" class="btn_comm" href="javascript:;" alt="user"><i class="fa fa-user-o"></i></a>
+											<ul style="top: 24px; width: 100%; overflow: hidden; display: none; z-index: 3;">
+											<li>검색결과가 없습니다.</li>
+                                            </ul>
+								    </div>
+								</dd>
+							</dl>
+						</li>
+						<!-- box2 -->
+						<li>
+							<dl class="sub_dtdd">
+								<dt class="dtype_block">
+									Job ID
+								</dt>
+								<dd class="dtype_block">
+									<input type="text" style="width:100%;">
+								</dd>
+							</dl>
+						</li>
+						<!-- box3 -->
+						<li>
+							<dl class="sub_dtdd">
+								<dt class="dtype_block">
+									Job Code
+								</dt>
+								<dd class="dtype_block">
+									<!-- 셀렉트 -->
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<!-- 선택 값 -->
+										<input type="text" class="sub_dsel_in" style="width:100%" />
+										<!-- 옵션 -->
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+									<!-- // 셀렉트 -->
+								</dd>
+							</dl>
+						</li>
+						<!-- box4 -->
+						<li>
+							<dl class="sub_dtdd">
+								<dt class="dtype_block">
+									Job Name
+								</dt>
+								<dd class="dtype_block">
+									<input type="text" style="width:100%;">
+								</dd>
+							</dl>
+						</li>
+						<!-- box5 -->
+						<li>
+							<dl class="sub_dtdd">
+								<dt class="dtype_block">
+									Job Status
+								</dt>
+								<dd class="dtype_block">
+									<!-- 셀렉트 -->
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<!-- 선택 값 -->
+										<div class="sub_dsel_in">
+											All
+										</div>
+										<!-- 옵션 -->
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+									<!-- // 셀렉트 -->
+								</dd>
+							</dl>
+						</li>
+					</ul>
+
+					<!-- 버튼 임시테스트 -->
+					<ul class="sub_sblb_wrap box5">
+						<li>
+							<dl class="sub_dtdd">
+								<dt class="dtype_block">
+									test
+								</dt>
+								<dd class="dtype_block">
+									<div class="sub_dsel" style="width: 100%;" onclick="dsel_over(this)">
+										<input class="fl_l" id="searchCondMin" style="width: 100px;" type="text" placeholder="Min Value">
+										<span class="gap_txt fl_l">~</span>
+		                  	<input class="fl_l" id="searchCondMax" style="width: 100px;" type="text" placeholder="Max Value">
+		                   	<!-- 버튼수정 : 추가 -->
+												<a class="btn_comm add ml5 fl_l" onclick="fn_addLine(this)" href="javascript:;"></a>
+												<!-- //버튼수정 : 추가 -->
+									</div>
+								</dd>
+							</dl>
+
+						</li>
+					</ul>
+					<!-- //버튼 임시테스트 -->
+					<!-- 숨겨진 검색조건 부분 -->
+					<div class="sub_sblb_fold mt10">
+						<ul class="sub_sblb_wrap box5">
+							<!-- box1 -->
+							<li>
+								<dl class="sub_dtdd">
+									<dt class="dtype_block">
+										Request Date
+									</dt>
+									<dd class="dtype_block">
+							      	<div class="sub_txtBt mb10" style="width: 100%;">
+							            <input class="input_cal" style="width: calc(50% - 34px);" type="text" value="2019-04-01">
+							            <a class="btn_comm" href="javascript:;" alt="calendar"><i class="fa fa-calendar"></i></a>
+							            <span class="gap_txt">~</span>
+							            <input class="input_cal" style="width: calc(50% - 34px);" type="text" value="2019-04-02">
+							            <a class="btn_comm" href="javascript:;" alt="calendar"><i class="fa fa-calendar"></i></a>
+					            </div>
+									</dd>
+									<dt>
+								</dl>
+							</li>
+							<!-- box2 -->
+							<li>
+								<dl class="sub_dtdd">
+									<dt class="dtype_block">
+										Start Date
+									</dt>
+									<dd class="dtype_block">
+										<div class="sub_txtBt mb10" style="width: 100%;">
+								        <input class="input_cal" style="width: calc(100% - 25px);" type="text" value="2019-04-01">
+							          <a class="btn_comm" href="javascript:;" alt="calendar"><i class="fa fa-calendar"></i></a>
+							      </div>
+									</dd>
+								</dl>
+							</li>
+							<!-- box3 -->
+							<li>
+								<dl class="sub_dtdd">
+									<dt class="dtype_block">
+										End Date
+									</dt>
+									<dd class="dtype_block">
+										<div class="sub_txtBt mb10" style="width: 100%;">
+								        <input class="input_cal" style="width: calc(100% - 25px);" type="text" value="2019-04-01">
+							          <a class="btn_comm" href="javascript:;" alt="calendar"><i class="fa fa-calendar"></i></a>
+							      </div>
+									</dd>
+								</dl>
+							</li>
+							<!-- box4 -->
+							<li>
+								<dl class="sub_dtdd">
+									<dt class="dtype_block">
+										Job Status
+									</dt>
+									<dd class="dtype_block">
+										<!-- 셀렉트 -->
+										<div class="sub_dsel" onClick="dsel_over(this)">
+											<!-- 선택 값 -->
+											<div class="sub_dsel_in">
+												All
+											</div>
+											<!-- 옵션 -->
+											<ul>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+											</ul>
+										</div>
+										<!-- // 셀렉트 -->
+									</dd>
+								</dl>
+							</li>
+							<!-- box5 -->
+							<li></li>
+						</ul>
+					</div>
+					<!-- // 숨겨진 검색조건 부분 -->
+					<!-- 검색 조건 스위치 및 각종 버튼 -->
+					<div class="sub_sblb_both">
+						<!-- 스위치 -->
+						<div class="sub_sblb_both_l pt5">
+							<div class="swtype">
+								<input type="checkbox" id="sw1" checked onChange="fn_foldSearch(this)">
+								<label for="sw1" data-txt="검색조건 닫기">검색조건 열기</label>
+							</div>
+						</div>
+						<!-- 버튼 color 수정  class="btn_graynew sblue"-->
+						<div class="sub_sblb_both_r">
+              <a href="javascript:;" class="btn_white s"><span class="btn_gTxt">Clear</span></a>
+              <a href="javascript:;" class="btn_graynew sblue"><span class="btn_gTxt"><i class="fa fa-search"></i>Search</span></a>
+						</div>
+					</div>
+					<!-- // 검색 조건 스위치 및 각종 버튼 -->
+				</div>
+			</div>
+			<!-- // 조건검색 -->
+			<!-- 테이블 top -->
+			<div class="sub_tableTopBox mt30">
+				<div class="sub_tableTopBox_l">
+					<span class="pr5">Show </span>
+					<!-- 셀렉트 -->
+					<div class="sub_dsel" onClick="dsel_over(this)" style="width:60px;">
+						<!-- 선택 값 -->
+						<div class="sub_dsel_in">
+							선택
+						</div>
+						<!-- 옵션 -->
+						<ul>
+							<li onClick = "dsel_liClick(this)">1</li>
+							<li onClick = "dsel_liClick(this)">2</li>
+							<li onClick = "dsel_liClick(this)">3</li>
+							<li onClick = "dsel_liClick(this)">4</li>
+							<li onClick = "dsel_liClick(this)">5</li>
+							<li onClick = "dsel_liClick(this)">6</li>
+							<li onClick = "dsel_liClick(this)">7</li>
+							<li onClick = "dsel_liClick(this)">8</li>
+							<li onClick = "dsel_liClick(this)">9</li>
+							<li onClick = "dsel_liClick(this)">10</li>
+						</ul>
+					</div>
+					<!-- //셀렉트 -->
+					<span class="pl5">Rows</span>
+					<span class="pc_r1 fw_b pl10">[1 to 9 / Total : 300]</span>
+					<span class="pc_r1">2018-03-12 08:40:01</span>
+				</div>
+        <!-- 0908버튼수정 -->
+				<div class="sub_tableTopBox_r">
+					            <a class="btn_white" href="javascript:;"><span class="btn_gTxt"><i class="fa fa-download"></i>첨부파일 다운로드</span></a>
+											<a class="btn_white" href="javascript:;"><span class="btn_gTxt">결재요청</span></a>
+											<a class="btn_white" href="javascript:;"><span class="btn_gTxt">삭제</span></a>
+				</div>
+			</div>
+			<!-- //테이블 top -->
+			<!-- 테이블 -->
+			<div class="sub_tableWrap mt10 type02">
+				<div class="tableWrap">
+					<table>
+						<colgroup>
+							<col width="63px" />
+							<col width="86px" />
+							<col width="auto" />
+							<col width="140px" />
+							<col width="140px" />
+							<col width="140px" />
+							<col width="140px" />
+							<col width="200px" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th><input type="checkbox"></th>
+								<th>User</th>
+								<th>Job ID</th>
+								<th>Job Code</th>
+								<th>Job Name</th>
+								<th>State A</th>
+								<th>Job Cancel</th>
+								<th>Request Date</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+								<th>Report</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td align="center" class="lnone"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s g"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center"><a title="edit" class="btn_blue3" href="javascript:;" alt="edit"><i class="fa fa-pencil"></i></a></td>
+							</tr>
+							<tr>
+								<td align="center" class="lnone"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s g"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center"><a title="edit" class="btn_blue3" href="javascript:;" alt="file"><i class="fa fa-file-text-o"></i></a></td>
+							</tr>
+							<tr>
+								<td align="center" class="lnone"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s g"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center"><a title="edit" class="btn_blue3" href="javascript:;" alt="file"><i class="fa fa-paperclip"></i></a></td>
+							</tr>
+							<tr>
+								<td align="center" class="lnone"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s g"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center">
+									<a class="btn_blue3 file_blue" href="javascript:;"></a>
+								</td>
+							</tr>
+							<tr>
+								<td align="center" class="lnone"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s b"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center">
+									<a class="btn_blue3 people_blue" href="javascript:fnCsvDownload('product');"></a>
+								</td>
+							</tr>
+							<tr>
+								<td align="center" class="lnone"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s b"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center">
+									<a class="btn_blue3 csv_blue" href="javascript:fnCsvDownload('product');"></a>
+								</td>
+							</tr>
+							<tr>
+								<td align="center" class="lnone"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s y"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center">
+									<!-- 버튼수정 : 상세보기 -->
+									<a title="detailView" class="btn_blue3 detailView" href="javascript:;" alt="detailView"></a>
+									<!-- //버튼수정 : 상세보기 -->
+								</td>
+							</tr>
+							<tr>
+								<td align="center" class="lnone"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s r"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center">
+									<!-- 버튼수정 : 삭제 -->
+									<a title="delete" class="btn_comm delete" href="javascript:;" alt="delete"></a>
+									<!-- //버튼수정 : 삭제 -->
+								</td>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // 테이블 -->
+			<div class="fl_w">
+				<!-- 페이징 -->
+				<div class="sub_pasing mt20 fl_r">
+					<a href="javascript:;" class="p"></a>
+					<a href="javascript:;" class="pp"></a>
+					<a href="javascript:;" class="sel">1</a>
+					<a href="javascript:;">2</a>
+					<a href="javascript:;">3</a>
+					<a href="javascript:;" class="ooo"></a>
+					<a href="javascript:;" class="n"></a>
+					<a href="javascript:;" class="nn"></a>
+				</div>
+				<!-- //페이징 -->
+			</div>
+		</div>
+	</div>
+	<!-- //wrap -->
+</body>
+</html>

@@ -1,0 +1,3866 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="../css/common2.css" />
+	<link rel="stylesheet" href="../css/main.css" />
+	<link rel="stylesheet" href="../css/ko.css" />
+	<style>
+		body{padding:40px 20px 20px;}
+		body > h1{font-size:30px; text-align:center; padding:0 0 60px 0;}
+		.gnb{position:fixed; top:0; right:17px; z-index:100; padding:20px 0; width:180px; min-width:auto; box-shadow:0 0 10px 0 rgba(0,0,0,0.4); text-align:center; background:#fff;}
+		.gnb > span{display:inline-block; padding:2px 0 0; font-size:15px; font-weight:bold;}
+		.gnb > select{width:80%; font-size:14px;}
+		.gnb > ul{display:flex; justify-content:center; align-items:center; height:100%;}
+		.gnb > ul > li{display:inline-block; cursor:pointer;}
+		.gnb > ul > li + li{margin-left:7px; padding-left:8px; border-left:1px solid #999;}
+		body > div{padding:30px; min-width:800px;}
+		body > div > h1{padding-bottom:15px;}
+		h1 + .view_div{margin-top:30px;}
+		.hbox > li{padding:15px 0 0 0;}
+		.hbox > li + li{padding-top:35px; margin-top:45px; border-top:1px dotted black;}
+		.hbox.type2{font-size:0;}
+		.hbox.type2 > li{display:inline-block; padding-top:0; margin-top:35px; width:180px; vertical-align:top; text-align:center;}
+		.hbox.type2 > li + li{padding-top:0; border-top-width:0;}
+		.hbox.type2 > li .view_div{height:75px;}
+		.view_div{position:relative; z-index:1; padding:0 0 10px 0;}
+		.view_div:after, .view_div:before{position:absolute; left:-5px; padding:0 5px; display:block; font-size:11px; border-radius:3px; border:1px solid #ededed; box-shadow:3px 3px 5px 1px rgba(0,0,0,0.2); background:#fff;}
+		.view_div:after{content:"view"; top:-18px;}
+		.view_div:before{content:"source"; bottom:-37px;}
+		.area_box{border:1px solid #ededed;}
+		.area_box + .area_box{margin-top:20px;}
+		.source_txt{position:relative; display:block; padding:15px 0; margin:30px 0 0 0; width:100%; height:100px; white-space:pre;}
+		.bcb{background:black;}
+	</style>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="../js/ko.js"></script>
+	<script type="text/javascript" src="../js/swiper.min.js"></script>
+	<script type="text/javascript" src="../js/answer_common.js"></script>
+	<script>
+		$(function(){
+			$(".view_div").each(function(){
+				var html = $(this).html();
+				if(!$(this).hasClass("t")){
+					html = html.replace(/\n/g,'');
+					html = html.replace(/\t/g,'');
+				};
+				$(this).parent().find(".source_txt").html(html);
+			});
+			$(".area_box > h1").each(function(index,node){
+				var source = "<option>" + $(node).text() + "</option>";
+				$(".gnb select").append(source);
+			});
+			$(".source_txt").click(function(){
+				$(this).select();
+			});
+		});
+		function fn_l(el){
+			var txt1 = $(el).val();
+			var n = 0;
+			var top = 0;
+			if(txt1 != "top"){
+				$(".area_box > h1").each(function(index,node){
+					var that = $(node);
+					var txt2 = that.text();
+					if(txt1 == txt2){
+						top = $(node).offset().top + $("body").scrollTop();
+						n = index;
+						return false;
+					};
+				});
+				$("body").scrollTop(top - 50);
+			}else{
+				$("body").scrollTop(0);
+			};
+		};
+	</script>
+	<script>
+		$(function(){
+
+		var swiper = new Swiper('.swiper-container', {
+			slidesPerView: 7,
+			direction: getDirection(),
+			navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+			},
+			on: {
+			resize: function () {
+				swiper.changeDirection(getDirection());
+			}
+			}
+		});
+
+		function getDirection() {
+		var windowWidth = window.innerWidth;
+		var direction = window.innerWidth <= 760 ? 'vertical' : 'horizontal';
+
+		return direction;
+		}
+		});
+	</script>
+</head>
+<body onClick="fn_Click_remove(this)" onScroll="fn_remove()" style="overflow:auto;">
+	<h1>퍼블 GUIDE</h1>
+	<div class="gnb">
+		<span>바로가기</span>
+		<select onChange='fn_l(this)'>
+			<option>top</option>
+		</select>
+	</div>
+	<!-- 체크박스 -->
+	<div class="area_box">
+		<h1>체크박스 & 스위치</h1>
+		<ul class="hbox type2">
+			<li>
+				<div class="view_div">
+					<input type="checkbox" id="c01" class="sub_cbox01" name="c1">
+					<label for="c01" style="color:black">Active</label>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly >
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<div class="small_swWrap">
+						<input name="r_02" class="small_sw" id="r_2-1" type="radio" checked="">
+						<label for="r_2-1">AVG</label>
+						<input name="r_02" class="small_sw" id="r_2-2" type="radio">
+						<label for="r_2-2">SUM</label>
+					</div>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<div class="dis_ib fs_0">
+						<input name="r_01" class="small_sw" id="r_01" type="radio" checked="">
+						<label for="r_01">AVG</label>
+					</div>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<div>
+						<div class="switch_input" style="width:100%;">
+							<input type="radio" id="sw1-1" name="sw1" checked />
+							<label for="sw1-1">Meterial</label>
+							<input type="radio" id="sw1-2" name="sw1" />
+							<label for="sw1-2">Device</label>
+						</div>
+					</div>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>
+	</div>
+	<!-- 인펏 -->
+	<div class="area_box">
+		<h1>입력창</h1>
+		<ul class="hbox">
+			<li>
+				<div class="view_div">
+					<div class="sub_txtBt">
+						<input disabled="" class="input_cal" style="width: calc(50% - 34px);" type="text" value="2019-04-01">
+						<input class="icon_cal" type="button">
+						<span class="gap_txt">~</span>
+						<input disabled="" class="input_cal" style="width: calc(50% - 35px);" type="text" value="2019-04-02">
+						<input class="icon_cal" type="button">
+					</div>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<div class="sub_txtBt mt10">
+						<input disabled="" class="input_cal" style="width: calc(50% - 34px);" type="text" value="2019-04-01">
+						<input disabled="" class="icon_cal" type="button">
+						<span class="gap_txt">~</span>
+						<input disabled="" class="input_cal" style="width: calc(50% - 35px);" type="text" value="2019-04-02">
+						<input disabled="" class="icon_cal" type="button">
+					</div>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<div class="sub_txtBt mt10">
+						<input style="width: calc(50% - 25px);" type="text">
+						<input class="icon_person" type="button">
+					</div>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<div class="sub_txtBt mt10">
+						<input style="width: calc(50% - 25px);" type="text">
+						<a class="btn_rec searchBasic" href="javascript:;"></a>
+					</div>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<div class="sub_dsel mt10" onclick="dsel_over(this)">
+						<div class="sub_dsel_in">
+							All
+						</div>
+						<ul>
+							<li onclick="dsel_liClick(this)">True</li>
+							<li onclick="dsel_liClick(this)">False</li>
+						</ul>
+					</div>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+
+					<dl class="sub_dtdd">
+						<dt style="width: 95px;">
+							Input Set 변경
+						</dt>
+						<dd style="width: calc(100% - 95px);">
+							<div class="sub_dsel mt10" style="width:150px" onclick="dsel_over(this)">
+								<div class="sub_dsel_in">
+									All
+								</div>
+								<ul>
+									<li onclick="dsel_liClick(this)">True</li>
+									<li onclick="dsel_liClick(this)">False</li>
+								</ul>
+							</div>
+						</dd>
+					</dl>
+
+
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<div class="sub_dsel mt10" onclick="dsel_over(this,true)">
+						<input type="text" class="sub_dsel_in" style="width:100%;">
+						<ul>
+							<li onclick="dsel_liClick(this)">True</li>
+							<li onclick="dsel_liClick(this)">False</li>
+						</ul>
+					</div>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<input type="text" class="mt10 nnnn" style="width:100%" onKeydown="fn_onlyNumber(this)" onKeyup="fn_onlyNumber(this)" placeholder="입력하세요">
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<input type="text" class="mt10" style="width:100%" onKeydown="fn_onlyNumber(this)" onKeyup="fn_onlyNumber(this)" data-max="255" data-min="-20"placeholder="입력하세요">
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<input type="text" class="mt10" style="width:100%" disabled placeholder="입력하세요">
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<input type="text" class="mt10" style="width:100%" readonly placeholder="입력하세요">
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<input type="text" class="mt10" style="width:100%" wrong placeholder="입력하세요">
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<dl class="sub_dtdd mt10">
+						<dt style="width: 115px;">
+							Input File Upload
+						</dt>
+						<dd style="width: calc(100% - 115px);">
+							<div class="sub_dFile">
+								<input disabled="" type="text" value="File Input(Tiny)">
+								<input onclick="fn_fileClick(this)" type="button" value="Choose File">
+								<input onchange="fn_fileChange(this)" type="file">
+							</div>
+						</dd>
+					</dl>				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<div class="mt10">
+						<div class="contbox_wrap" data-max="30" data-min="0"><a href="javascript:;" class="d" onClick="fn_countBox(this)">-</a><input type="text" value="0" onKeydown="fn_countBoxCheck(this)" onKeyup="fn_countBoxCheck(this)" style="width:30px;"><a href="javascript:;" class="u" onClick="fn_countBox(this)">+</a></div>
+					</div>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<div class="mt10">
+						<div class="input_number">
+							<dl>
+								<dt>Cost</dt>
+								<dd>
+									<input type="text" onKeydown="fn_numberformat(this)" onKeyup="fn_numberformat(this)" maxlength="7">
+									<span>백만원</span>
+								</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>
+	</div>
+	<!-- 버튼 스타일0(활성화) -->
+	<div class="area_box">
+		<h1>버튼 스타일0(활성화)</h1>
+		<ul class="hbox type2">
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s2" href="javascript:;">
+						<span class="btn_gIcon re"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s2" href="javascript:;">
+						<span class="btn_gIcon check"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s2" href="javascript:;">
+						<span class="btn_gIcon minus"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s2" href="javascript:;">
+						<span class="btn_gIcon play"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s2" href="javascript:;">
+						<span class="btn_gIcon search"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s2" href="javascript:;">
+						<span class="btn_gIcon upload"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s2" href="javascript:;">
+						<span class="btn_gIcon delate"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>
+	</div>
+	<!-- 버튼 스타일0(비활성화) -->
+	<div class="area_box">
+		<h1>버튼 스타일0(비활성화)</h1>
+		<ul class="hbox type2">
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s2 disabled" href="javascript:;">
+						<span class="btn_gIcon re"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s2 disabled" href="javascript:;">
+						<span class="btn_gIcon check"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s2 disabled" href="javascript:;">
+						<span class="btn_gIcon minus"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s2 disabled" href="javascript:;">
+						<span class="btn_gIcon play"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s2 disabled" href="javascript:;">
+						<span class="btn_gIcon search"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s2 disabled" href="javascript:;">
+						<span class="btn_gIcon upload"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s2 disabled" href="javascript:;">
+						<span class="btn_gIcon delate"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s2 disabled" href="javascript:;">
+						<span class="btn_gIcon del"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>
+	</div>
+	<!-- 버튼 스타일1(활성화) -->
+	<div class="area_box">
+		<h1>버튼 스타일1(활성화)</h1>
+		<ul class="hbox type2">
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s" href="javascript:;">
+						<span class="btn_gIcon re"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s" href="javascript:;">
+						<span class="btn_gIcon check"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s" href="javascript:;">
+						<span class="btn_gIcon minus"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s" href="javascript:;">
+						<span class="btn_gIcon play"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s" href="javascript:;">
+						<span class="btn_gIcon search"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s" href="javascript:;">
+						<span class="btn_gIcon upload"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s" href="javascript:;">
+						<span class="btn_gIcon delate"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s" href="javascript:;">
+						<span class="btn_gIcon del"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>
+	</div>
+	<!-- 버튼 스타일1(비활성화) -->
+	<div class="area_box">
+		<h1>버튼 스타일1(비활성화)</h1>
+		<ul class="hbox type2">
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s disabled" href="javascript:;">
+						<span class="btn_gIcon re"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s disabled" href="javascript:;">
+						<span class="btn_gIcon check"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s disabled" href="javascript:;">
+						<span class="btn_gIcon minus"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s disabled" href="javascript:;">
+						<span class="btn_gIcon play"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s disabled" href="javascript:;">
+						<span class="btn_gIcon search"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s disabled" href="javascript:;">
+						<span class="btn_gIcon upload"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s disabled" href="javascript:;">
+						<span class="btn_gIcon delate"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s disabled" href="javascript:;">
+						<span class="btn_gIcon del"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>
+	</div>
+	<!-- 버튼 스타일2(활성화) -->
+	<div class="area_box">
+		<h1>버튼 스타일2(활성화)</h1>
+		<ul class="hbox type2">
+			<li>
+				<div class="view_div">
+					<a class="btn_gray" href="javascript:;">
+						<span class="btn_gIcon re"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray" href="javascript:;">
+						<span class="btn_gIcon check"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray" href="javascript:;">
+						<span class="btn_gIcon plus"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray" href="javascript:;">
+						<span class="btn_gIcon minus"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray" href="javascript:;">
+						<span class="btn_gIcon play"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray" href="javascript:;">
+						<span class="btn_gIcon search"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray" href="javascript:;">
+						<span class="btn_gIcon upload"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray" href="javascript:;">
+						<span class="btn_gIcon delate"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray" href="javascript:;">
+						<span class="btn_gIcon del"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>
+	</div>
+	<!-- 버튼 스타일2(비활성화) -->
+	<div class="area_box">
+		<h1>버튼 스타일2(비활성화)</h1>
+		<ul class="hbox type2">
+			<li>
+				<div class="view_div">
+					<a class="btn_gray disabled" href="javascript:;">
+						<span class="btn_gIcon re"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray disabled" href="javascript:;">
+						<span class="btn_gIcon check"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray disabled" href="javascript:;">
+						<span class="btn_gIcon minus"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray disabled" href="javascript:;">
+						<span class="btn_gIcon play"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray disabled" href="javascript:;">
+						<span class="btn_gIcon search"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray disabled" href="javascript:;">
+						<span class="btn_gIcon upload"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray disabled" href="javascript:;">
+						<span class="btn_gIcon delate"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray disabled" href="javascript:;">
+						<span class="btn_gIcon del"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>	</div>
+	<!-- 버튼 스타일3(활성화) -->
+	<div class="area_box">
+		<h1>버튼 스타일3(활성화)</h1>
+		<ul class="hbox type2">
+			<li>
+				<div class="view_div">
+					<a class="btn_blue s" href="javascript:;">
+						<span class="btn_gIcon re"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue s" href="javascript:;">
+						<span class="btn_gIcon check"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue s" href="javascript:;">
+						<span class="btn_gIcon minus"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue s" href="javascript:;">
+						<span class="btn_gIcon play"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue s" href="javascript:;">
+						<span class="btn_gIcon search"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue s" href="javascript:;">
+						<span class="btn_gIcon upload"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue s" href="javascript:;">
+						<span class="btn_gIcon delate"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue s" href="javascript:;">
+						<span class="btn_gIcon del"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>
+	</div>
+	<!-- 버튼 스타일4(활성화) -->
+	<div class="area_box">
+		<h1>버튼 스타일4(활성화)</h1>
+		<ul class="hbox type2">
+			<li>
+				<div class="view_div">
+					<a class="btn_blue" href="javascript:;">
+						<span class="btn_gIcon re"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue" href="javascript:;">
+						<span class="btn_gIcon check"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue" href="javascript:;">
+						<span class="btn_gIcon minus"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue" href="javascript:;">
+						<span class="btn_gIcon play"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue" href="javascript:;">
+						<span class="btn_gIcon search"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue" href="javascript:;">
+						<span class="btn_gIcon upload"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue" href="javascript:;">
+						<span class="btn_gIcon delate"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue" href="javascript:;">
+						<span class="btn_gIcon del"></span>
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>
+	</div>
+	<!-- 버튼 스타일5 -->
+	<div class="area_box">
+		<h1>버튼 스타일5</h1>
+		<ul class="hbox type2">
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s" href="javascript:;">
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray s disabled" href="javascript:;">
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray" href="javascript:;">
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray disabled" href="javascript:;">
+						<span class="btn_gTxt">Refresh</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_blue">
+						<span class="btn_gTxt">첨부파일 다운로드</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_blue s">
+						<span class="btn_gTxt">첨부파일 다운로드</span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_purple">결재작성</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_purple disabled">결재작성</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_purple r" href="javascript:;">Plot</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray ss" href="javascript:;">Energy  Diagram</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray ss b" href="javascript:;">Energy  Diagram</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_view" href="javascript:;">View Deatails</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>
+	</div>
+	<!-- 버튼 스타일6 -->
+	<div class="area_box">
+		<h1>버튼 스타일6</h1>
+		<ul class="hbox type2 type2">
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b person"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b person disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b search"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b search disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b pen"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b pen disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b pcheck"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b pcheck disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b pp"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b pp disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b csv"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b csv disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b cp"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b cp disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b cm"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b cm disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b calc"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b calc disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b down"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b down disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b people"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec b people disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>
+	</div>
+	<!-- 버튼 스타일7 -->
+	<div class="area_box">
+		<h1>버튼 스타일7</h1>
+		<ul class="hbox type2 type2">
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec person"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec person disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec search"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec search disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec pen"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec pen disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec pcheck"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec pcheck disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec pp"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec pp disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec csv"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec csv disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec cp"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec cp disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec cm"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec cm disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec calc"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec calc disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec down"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;"class="btn_rec down disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec people"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec people disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec searchBasic"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a href="javascript:;" class="btn_rec searchBasic disabled"></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+	</div>
+	<!-- 버튼 스타일8 -->
+	<div class="area_box">
+		<h1>버튼 스타일8</h1>
+		<ul class="hbox type2 type2">
+			<li>
+				<div class="view_div">
+					<a class="btn_gray2" href="javascript:;">Read All +</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_gray2 disabled" href="javascript:;">Read All +</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_cancelY" href="javascript:;">Cancel</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_cir" href="javascript:;">
+						<span class="txt">Get Mol<br />File</span>
+						<span class="icon_arrR"></span>
+					</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<span class="btn_x p">+</span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<span class="btn_x m">-</span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>
+	</div>
+	<!-- 버튼 스타일9 -->
+	<div class="area_box">
+		<h1>버튼 스타일9</h1>
+		<ul class="hbox type2">
+			<li style="width:300px">
+				<div class="view_div bcb">
+					<a class="btn_rec_wa" href="javascript:;">View Deatails <span class="icon_arr right"></span></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div bcb">
+					<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>
+	</div>
+	<!-- 아이콘 -->
+	<div class="area_box">
+		<h1>아이콘</h1>
+		<ul class="hbox type2">
+			<li>
+				<div class="view_div">
+					<span class="btn_rec_ra">New</span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<span class="btn_rec_ra y">New</span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<span class="icon_circle">UP</span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<span class="person_tooltip">
+						<div class="pt_wrap">
+							<div class="pt_wrapCon">
+								<h4>해석담당자</h4>
+								<p>홍길동 연구원(CAE팀)<br>+82-31-8000-9876</p>
+							</div>
+							<a class="pt_btn" href="javascript:;">Manual.pdf</a>
+						</div>
+					</span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<span class="count">1</span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<span class="icon_circle s r"></span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<span class="icon_circle s g"></span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<span class="icon_circle s g2"></span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<span class="icon_circle s b"></span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<span class="icon_circle s y"></span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<span class="icon_circle s bg"></span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<span class="icon_circle s bb"></span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<span class="icon_circle s r2"></span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<span class="icon_circle s p"></span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<span class="icon_circle s gray"></span>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>
+	</div>
+	<!-- 탭1 -->
+	<div class="area_box">
+		<h1>탭1</h1>
+		<div class="view_div t">
+			<!-- tap -->
+			<div class="as_tap mt10">
+				<ul class="as_tapCon_wrap" style="height:100px;">
+					<li class="on">
+						<a href="javascript:;" onClick="fn_Click_tap(this)">Tab1</a>
+						<div class="as_tapCon">
+							<p style="height:100%; border:1px solid #ededed; font-size:20px; font-weight:bold; text-align:center; color:black;">A</p>
+						</div>
+					</li>
+					<li>
+						<a href="javascript:;" onClick="fn_Click_tap(this)">Tab2</a>
+						<div class="as_tapCon">
+							<p style="height:100%; border:1px solid #ededed; font-size:20px; font-weight:bold; text-align:center; color:black;">B</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!-- // tap -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 탭2 -->
+	<div class="area_box">
+		<h1>탭2</h1>
+		<div class="view_div t">
+			<!-- tap -->
+			<div class="as_tap">
+				<ul class="as_tapBt_wrap">
+					<li class="on">
+						<a onclick="fn_Click_tap(this)" href="javascript:;">Tab1</a>
+					</li>
+					<li>
+						<a onclick="fn_Click_tap(this)" href="javascript:;">Tab2</a>
+					</li>
+				</ul>
+				<ul class="as_tapCon2_wrap">
+					<li class="on">
+						<div class="pt10 pb10">
+							<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">A</p>
+						</div>
+					</li>
+					<li>
+						<div class="pt10 pb10">
+							<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">B</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!-- //tap -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 탭3 -->
+	<div class="area_box">
+		<h1>탭3</h1>
+		<div class="view_div t">
+			<!-- tap -->
+			<div class="as_tap type03">
+				<ul class="as_tapBt_wrap">
+					<li class="on">
+						<a onclick="fn_Click_tap(this)" href="javascript:;">해석물성</a>
+					</li>
+					<li>
+						<a onclick="fn_Click_tap(this)" href="javascript:;">측정물성</a>
+					</li>
+					<li>
+						<a onclick="fn_Click_tap(this)" href="javascript:;">3D View</a>
+					</li>
+				</ul>
+				<ul class="as_tapCon2_wrap">
+					<li class="on">
+						<div>
+							<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">A</p>
+						</div>
+					</li>
+					<li>
+						<div>
+							<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">B</p>
+						</div>
+					</li>
+					<li>
+						<div>
+							<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">C</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!-- //tap -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 탭4 -->
+	<div class="area_box">
+		<h1>탭4</h1>
+		<div class="view_div t">
+			<!-- tap -->
+			<div class="as_tap type04">
+				<ul class="as_tapBt_wrap">
+					<li class="on">
+						<a onclick="fn_Click_tap(this)" href="javascript:;">Data조회</a>
+					</li>
+					<li>
+						<a onclick="fn_Click_tap(this)" href="javascript:;">Plot조회</a>
+					</li>
+				</ul>
+				<ul class="as_tapCon2_wrap">
+					<li class="on">
+						<div class="pb10">
+							<!-- 조건검색 -->
+							<div class="sub_selBox">
+								<div class="sub_sbLayerBox">
+									<ul class="sub_sblb_wrap box">
+										<!-- box1 -->
+										<li>
+											<dl class="sub_dtdd">
+												<dt class="dtype_block">
+													Material Name
+												</dt>
+												<dd class="dtype_block fs_0">
+													<input type="text" style="width:100%;">
+												</dd>
+											</dl>
+										</li>
+										<li>
+											<div class="ta_r" style="padding-top:23px;">
+												<a href="javascript:;" class="btn_gray s">
+													<span class="btn_gIcon search"></span>
+													<span class="btn_gTxt">Search</span>
+												</a>
+												<a href="javascript:;" class="btn_gray s">
+													<span class="btn_gIcon minus"></span>
+													<span class="btn_gTxt">Clear</span>
+												</a>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<!-- // 조건검색 -->
+						</div>
+					</li>
+					<li>
+						<div class="pb10">
+							<!-- 조건검색 -->
+							<div class="sub_selBox">
+								<div class="sub_sbLayerBox">
+									<ul class="sub_sblb_wrap box">
+										<!-- box1 -->
+										<li>
+											<dl class="sub_dtdd">
+												<dt class="dtype_block">
+													재료명
+												</dt>
+												<dd class="dtype_block fs_0">
+													<input type="text" style="width:100%;">
+												</dd>
+											</dl>
+										</li>
+										<li>
+											<div class="ta_r" style="padding-top:23px;">
+												<a class="btn_gray s" href="javascript:;">
+													<span class="btn_gIcon play"></span>
+													<span class="btn_gTxt">Run Simulation</span>
+												</a>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<!-- // 조건검색 -->
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!-- //tap -->
+			<!-- tap content -->
+			<div style="height:150px; overflow:auto;">
+				<ul class="as_tapConFar_wrap">
+					<li class="on"><p style="height:100%; font-size:30px; color:#ddd; text-align:center; background:#ededed;">그리드 영역1</p></li>
+					<li>
+						<!-- halfBox -->
+						<div class="sub_halfBox">
+							<ul>
+								<li class="pr50">
+									<div style="background: rgb(238, 238, 238); height: 100%; text-align: center; line-height: 30px;">A</div>
+								</li>
+								<li class="pl50">
+									<div style="background: rgb(238, 238, 238); height: 100%; text-align: center; line-height: 30px;">B</div>
+								</li>
+							</ul>
+							<div class="gapBtn">
+								<a class="btn_cir" href="javascript:;">
+									<span class="txt">Get Mol<br />File</span>
+									<span class="icon_arrL"></span>
+								</a>
+							</div>
+						</div>
+						<!-- // halfBox -->
+					</li>
+				</ul>
+			</div>
+			<!-- //tap content -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 탭5 -->
+	<div class="area_box">
+		<h1>탭5</h1>
+		<div class="view_div t">
+			<!-- tap -->
+			<div class="as_tap type03 etc mt20" data-d="20">
+				<ul class="as_tapBt_wrap">
+					<li class="on">
+						<a onclick="fn_Click_tap(this)" href="javascript:;">REPORT 2-1</a>
+					</li>
+					<li>
+						<a onclick="fn_Click_tap(this)" href="javascript:;">REPORT 2-2</a>
+					</li>
+					<li>
+						<a onclick="fn_Click_tap(this)" href="javascript:;">REPORT #4</a>
+					</li>
+				</ul>
+				<ul class="as_tapCon2_wrap">
+					<li class="on">
+						<div>
+							<div class="layout_t">
+								<div class="lyt_l">
+									<p style="height:100%; text-align:center; background:#fafbfd;">차트영역</p>
+								</div>
+								<div class="lyt_r">
+									<dl>
+										<dt>Layer name</dt>
+										<dd>ed01e0d5a7d0c6b8896e</dd>
+									</dl>
+									<!-- halfBox -->
+									<div class="sub_halfBox" style="height:calc(100% - 53px)">
+										<ul>
+											<li>
+												<!-- table -->
+												<div class="sub_tableWrap typePop2 pb10">
+													<div class="tableWrap">
+														<table>
+															<colgroup>
+																<col width="100px">
+																<col width="auto">
+																<col width="100px">
+																<col width="auto">
+															</colgroup>
+															<tbody>
+																<tr>
+																	<th align="center">비율</th>
+																	<td>8%</td>
+																	<th align="center">정보(mm)</th>
+																	<td class="fs_0">
+																		<div class="contbox_wrap" data-min="0" data-max="30"><a class="d" onclick="fn_countBox(this)" href="javascript:;">-</a><input style="width: 30px;" onkeydown="fn_countBoxCheck(this)" onkeyup="fn_countBoxCheck(this)" type="text" value="0"><a class="u" onclick="fn_countBox(this)" href="javascript:;">+</a></div>
+																		<a class="btn_purple r" href="javascript:;">적용</a>
+			
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+												<!-- // table -->
+												<!-- hauto box -->
+												<div class="hauto_box">
+													<p style="height:200%; text-align:center; background:#fafbfd;">차트영역</p>
+												</div>
+												<!-- // hauto box -->
+											</li>
+											<li>
+												<!-- table -->
+												<div class="sub_tableWrap typePop2 pb10">
+													<div class="tableWrap">
+														<table>
+															<colgroup>
+																<col width="200px">
+																<col width="auto">
+															</colgroup>
+															<tbody>
+																<tr>
+																	<th align="center">Layername</th>
+																	<td>ed0001</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+												<!-- // table -->
+												<!-- hauto box -->
+												<div class="hauto_box">
+													<p style="height:200%; text-align:center; background:#fafbfd;">차트영역</p>
+												</div>
+												<!-- // hauto box -->
+											</li>
+										</ul>
+									</div>
+									<!-- // halfBox -->
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">B</p>
+						</div>
+					</li>
+					<li>
+						<div>
+							<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">C</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!-- //tap -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 탭6 -->
+	<div class="area_box">
+		<h1>탭6</h1>
+		<div class="view_div t">
+			<!-- tap -->
+			<div class="as_tap type11" style="margin-top:20px">
+				<!-- tap -->
+				<ul class="as_tapCon_wrap" style="height: 150px;">
+					<!-- tap1 -->
+					<li class="on">
+						<a href="javascript:;" onclick="fn_Click_tap(this)">공통</a>
+						<!-- tap content -->
+						<div class="as_tapCon">
+							<p style="height:100%; border:1px solid #ededed; font-size:20px; font-weight:bold; text-align:center; color:black;">A</p>
+						</div>
+						<!-- // tap content -->
+					</li>
+					<!-- tap2 -->
+					<li class="">
+						<a href="javascript:;" onclick="fn_Click_tap(this)">EDGE_BENDING
+						</a>
+						<!-- tap content -->
+						<div class="as_tapCon">
+							CHARPY - con
+						</div>
+						<!-- // tap content -->
+					</li>
+					<!-- tap3 -->
+					<li class="">
+						<a href="javascript:;" onclick="fn_Click_tap(this)">EDGE_BENDING
+						</a>
+						<!-- tap content -->
+						<div class="as_tapCon">
+							COP_BENDING - con
+						</div>
+						<!-- // tap content -->
+					</li>
+					
+				</ul>
+				<!-- // tap -->
+			</div>
+			<!-- //tap -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 탭7 슬라이드탭 -->
+	<div class="area_box">
+		<h1>탭7 슬라이드탭</h1>
+		<div class="view_div t">
+			<div class="as_tap type12 swiper-container mt20">
+				<ul class="as_tapBt_wrap swiper-wrapper">
+				  <li class="swiper-slide on"><a onclick="fn_Click_tap(this)" href="javascript:;">공통</a></li>
+				  <li class="swiper-slide"><a onclick="fn_Click_tap(this)" href="javascript:;">EDGE_BENDING2</a></li>
+				  <li class="swiper-slide"><a onclick="fn_Click_tap(this)" href="javascript:;">EDGE_BENDING3</a></li>
+				  <li class="swiper-slide"><a onclick="fn_Click_tap(this)" href="javascript:;">EDGE_BENDING4</a></li>
+				  <li class="swiper-slide"><a onclick="fn_Click_tap(this)" href="javascript:;">EDGE_BENDING5</a></li>
+				  <li class="swiper-slide"><a onclick="fn_Click_tap(this)" href="javascript:;">EDGE_BENDING6</a></li>
+				  <li class="swiper-slide"><a onclick="fn_Click_tap(this)" href="javascript:;">EDGE_BENDING7</a></li>
+				  <li class="swiper-slide"><a onclick="fn_Click_tap(this)" href="javascript:;">EDGE_BENDING8</a></li>
+				  <li class="swiper-slide"><a onclick="fn_Click_tap(this)" href="javascript:;">EDGE_BENDING9</a></li>
+				  <li class="swiper-slide"><a onclick="fn_Click_tap(this)" href="javascript:;">EDGE_BENDING10</a></li>
+	  
+				</ul>
+				<ul class="as_tapCon2_wrap">
+				<li class="on">
+					<div>
+						<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">1</p>
+					</div>
+				</li>
+				<li>
+					<div>
+						<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">2</p>
+					</div>
+				</li>
+				<li>
+					<div>
+						<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">3</p>
+					</div>
+				</li>
+				<li>
+					<div>
+						<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">4</p>
+					</div>
+				</li>
+				<li>
+					<div>
+						<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">5</p>
+					</div>
+				</li>
+				<li>
+					<div>
+						<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">6</p>
+					</div>
+				</li>
+				<li>
+					<div>
+						<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">7</p>
+					</div>
+				</li>
+				<li>
+					<div>
+						<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">8</p>
+					</div>
+				</li>
+				<li>
+					<div>
+						<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">9</p>
+					</div>
+				</li>
+				<li>
+					<div>
+						<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">10</p>
+					</div>
+				</li>
+
+				</ul>
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+			</div>
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 조건검색 1 -->
+	<div class="area_box">
+		<h1>조건검색 1</h1>
+		<div class="view_div t">
+			<!-- 조건검색 -->
+			<div class="sub_selBox mt30">
+				<div class="sub_sbLayerBox">
+					<ul class="sub_sblb_wrap box5">
+						<!-- box1 -->
+						<li>
+							<dl class="sub_dtdd">
+								<dt class="dtype_block">
+									User
+								</dt>
+								<dd class="dtype_block">
+									<div class="sub_txtBt">
+										<input type="text" style="width:calc(100% - 24px);">
+										<input type="button" class="icon_person">
+									</div>
+								</dd>
+							</dl>
+						</li>
+						<!-- box2 -->
+						<li>
+							<dl class="sub_dtdd">
+								<dt class="dtype_block">
+									Job ID
+								</dt>
+								<dd class="dtype_block">
+									<input type="text" style="width:100%;">
+								</dd>
+							</dl>
+						</li>
+						<!-- box3 -->
+						<li>
+							<dl class="sub_dtdd">
+								<dt class="dtype_block">
+									Job Code
+								</dt>
+								<dd class="dtype_block">
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<input type="text" class="sub_dsel_in" style="width:100%" />
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</dd>
+							</dl>
+						</li>
+						<!-- box4 -->
+						<li>
+							<dl class="sub_dtdd">
+								<dt class="dtype_block">
+									Job Name
+								</dt>
+								<dd class="dtype_block">
+									<input type="text" style="width:100%;">
+								</dd>
+							</dl>
+						</li>
+						<!-- box5 -->
+						<li>
+							<dl class="sub_dtdd">
+								<dt class="dtype_block">
+									Job Status
+								</dt>
+								<dd class="dtype_block">
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											All
+										</div>
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</dd>
+							</dl>
+						</li>
+					</ul>
+					<div class="sub_sblb_fold mt10">
+						<ul class="sub_sblb_wrap box5">
+							<!-- box1 -->
+							<li style="width:250px; margin-left:0;">
+								<dl class="sub_dtdd">
+									<dt class="dtype_block">
+										Reques Date
+									</dt>
+									<dd class="dtype_block">
+										<div class="sub_txtBt">
+											<input type="text" class="input_cal" style="width:calc(50% - 34px);" value="2019-04-01" disabled>
+											<input type="button" class="icon_cal" disabled>
+											<span class="gap_txt">~</span>
+											<input type="text" class="input_cal" style="width:calc(50% - 35px);" value="2019-04-02" disabled>
+											<input type="button" class="icon_cal" disabled>
+										</div>
+									</dd>
+								</dl>
+							</li>
+							<!-- box2 -->
+							<li>
+								<dl class="sub_dtdd">
+									<dt class="dtype_block">
+										Start Date
+									</dt>
+									<dd class="dtype_block">
+										<div class="sub_txtBt">
+											<input type="text" class="input_cal" style="width:calc(50% - 34px);" value="2019-04-01">
+											<input type="button" class="icon_cal">
+											<span class="gap_txt">~</span>
+											<input type="text" class="input_cal" style="width:calc(50% - 35px);" value="2019-04-02">
+											<input type="button" class="icon_cal">
+										</div>
+									</dd>
+								</dl>
+							</li>
+							<!-- box3 -->
+							<li>
+								<dl class="sub_dtdd">
+									<dt class="dtype_block">
+										End Date
+									</dt>
+									<dd class="dtype_block">
+										<div class="sub_txtBt">
+											<input type="text" class="input_cal" style="width:calc(50% - 34px);" value="2019-04-01">
+											<input type="button" class="icon_cal">
+											<span class="gap_txt">~</span>
+											<input type="text" class="input_cal" style="width:calc(50% - 35px);" value="2019-04-02">
+											<input type="button" class="icon_cal">
+										</div>
+									</dd>
+								</dl>
+							</li>
+							<!-- box4 -->
+							<li>
+								<dl class="sub_dtdd">
+									<dt class="dtype_block">
+										Job Status
+									</dt>
+									<dd class="dtype_block">
+										<div class="sub_dsel" onClick="dsel_over(this)">
+											<div class="sub_dsel_in">
+												All
+											</div>
+											<ul>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+											</ul>
+										</div>
+									</dd>
+								</dl>
+							</li>
+							<!-- box5 -->
+							<li></li>
+						</ul>
+					</div>
+					<div class="sub_sblb_both">
+						<div class="sub_sblb_both_l pt5">
+							<div class="swtype">
+								<input type="checkbox" id="sw1" checked onChange="fn_foldSearch(this)">
+								<label for="sw1" data-txt="검색조건 닫기">검색조건 열기</label>
+							</div>
+						</div>
+						<div class="sub_sblb_both_r">
+							<a href="javascript:;" class="btn_gray s disabled">
+								<span class="btn_gIcon check"></span>
+								<span class="btn_gTxt">Save</span>
+							</a>
+							<a href="javascript:;" class="btn_gray s disabled">
+								<span class="btn_gIcon search"></span>
+								<span class="btn_gTxt">Search</span>
+							</a>
+							<a href="javascript:;" class="btn_gray s disabled">
+								<span class="btn_gIcon minus"></span>
+								<span class="btn_gTxt">Clear</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- // 조건검색 -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 조건검색 2 -->
+	<div class="area_box">
+		<h1>조건검색 2</h1>
+		<div class="view_div t">
+			<div class="sub_selBox">
+				<div class="sub_sbLayerBox">
+					<ul class="sub_sblb_wrap box">
+						<!-- box1 -->
+						<li class="pr20">
+							<dl class="sub_dtdd">
+								<dt style="width: 115px;">
+									해석 종류 선택
+								</dt>
+								<dd style="width: calc(100% - 115px);">
+									<div class="sub_dsel" onclick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											선택하세요
+										</div>
+										<ul>
+											<li onclick="dsel_liClick(this)"><label onclick="dsel_inputClick(this)"><input type="checkbox">집에가고 싶다</label></li>
+											<li onclick="dsel_liClick(this)"><label onclick="dsel_inputClick(this)"><input type="checkbox">정말로 가고 싶다</label></li>
+											<li onclick="dsel_liClick(this)"><label onclick="dsel_inputClick(this)"><input type="checkbox">배고파</label></li>
+											<li onclick="dsel_liClick(this)"><label onclick="dsel_inputClick(this)"><input type="checkbox">치킨먹고 싶다</label></li>
+											<li onclick="dsel_liClick(this)"><label onclick="dsel_inputClick(this)"><input type="checkbox">고기 먹고 싶다</label></li>
+											<!--
+											<li onClick = "dsel_liClick(this)">11</li>
+											<li onClick = "dsel_liClick(this)">22</li>
+											<li onClick = "dsel_liClick(this)">33</li>
+											<li onClick = "dsel_liClick(this)">44</li>
+											-->
+										</ul>
+									</div>
+								</dd>
+							</dl>
+						</li>
+						<!-- box2 -->
+						<li class="pl10 pr10 ">
+							<dl class="sub_dtdd">
+								<dt style="width: 115px;">
+									Job Name 입력
+								</dt>
+								<dd style="width: calc(100% - 115px);">
+									<input style="width: 100%;" type="text">
+								</dd>
+							</dl>
+						</li>
+						<!-- box3 -->
+						<li class="pl20">
+							<dl class="sub_dtdd">
+								<dt style="width: 115px;">
+									자동 첨부된 파일
+								</dt>
+								<dd style="width: calc(100% - 115px);">
+									<input style="width: 100%;" type="text">
+								</dd>
+							</dl>
+						</li>
+					</ul>
+					<ul class="sub_sblb_wrap box">
+						<!-- box1 -->
+						<li class="pr20">
+							<dl class="sub_dtdd">
+								<dt style="width: 115px;">
+									Input File Upload
+								</dt>
+								<dd style="width: calc(100% - 115px);">
+									<div class="sub_dFile">
+										<input disabled="" type="text" value="File Input(Tiny)">
+										<input onclick="fn_fileClick(this)" type="button" value="Choose File">
+										<input onchange="fn_fileChange(this)" type="file">
+									</div>
+								</dd>
+							</dl>
+						</li>
+						<!-- box2 -->
+						<li class="pl10 pr10"></li>
+						<!-- box3 -->
+						<li class="pl20 ta_r">
+							<a class="btn_gray s" href="javascript:;">
+								<span class="btn_gTxt">Run Simulation</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 조건검색 3 -->
+	<div class="area_box">
+		<h1>조건검색 3</h1>
+		<div class="view_div t">
+			<!-- 검색조건 -->
+			<div class="sub_requirehBox">
+				<div class="sub_rqSelBox">
+					<div class="sub_dsel" onclick="dsel_over(this)">
+						<div class="sub_dsel_in">
+							All
+						</div>
+						<ul>
+							<li onclick="dsel_liClick(this)">All</li>
+							<li onclick="dsel_liClick(this)">회로</li>
+							<li onclick="dsel_liClick(this)">재료</li>
+							<li onclick="dsel_liClick(this)">공정구동</li>
+							<li onclick="dsel_liClick(this)">기구</li>
+							<li onclick="dsel_liClick(this)">패널</li>
+							<li onclick="dsel_liClick(this)">기타</li>
+						</ul>
+					</div>
+				
+					<div class="sub_dsel" onclick="dsel_over(this)">
+						<div class="sub_dsel_in">
+							All
+						</div>
+						<ul>
+							<li onclick="dsel_liClick(this)">All</li>
+							<li onclick="dsel_liClick(this)">카테고리순</li>
+							<li onclick="dsel_liClick(this)">신규순</li>
+						</ul>
+					</div>
+				
+					<div class="sub_dsel" onclick="dsel_over(this)">
+						<div class="sub_dsel_in">
+							Sorts by
+						</div>
+						<ul>
+							<li onclick="dsel_liClick(this)">Sorts by</li>
+						</ul>
+					</div>
+				</div>
+				<div class="sub_rqInBox">
+					<div class="sub_txtBt">
+						<input style="width: calc(100% - 25px);" type="text">
+						<a class="btn_rec searchBasic" href="javascript:;"></a>
+					</div>
+				</div>
+			</div>
+			<!-- // 검색조건 -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 테이블1 -->
+	<div class="area_box">
+		<h1>테이블1</h1>
+		<div class="view_div t">
+			<!-- 테이블 -->
+			<div class="sub_tableWrap">
+				<div class="tableWrap">
+					<table>
+						<colgroup>
+							<col width="auto" />
+							<col width="180px" />
+							<col width="100px" />
+							<col width="110px" />
+							<col width="110px" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Value</th>
+								<th>Split</th>
+								<th>Begin</th>
+								<th>End</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="tp1">Folder 유저시간[hr]</td>
+								<td><input type="text" style="width:100%;"></td>
+								<td>
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											False
+										</div>
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<td><input type="text" style="width:100%;"></td>
+								<td><input type="text" style="width:100%;"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // 테이블 -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 테이블2 -->
+	<div class="area_box">
+		<h1>테이블2</h1>
+		<div class="view_div t">
+			<!-- 테이블 top -->
+			<div class="sub_tableTopBox mt10">
+				<div class="sub_tableTopBox_l">
+					<span class="pr5">Show </span>
+					<!-- 셀렉트 -->
+					<div class="sub_dsel" onClick="dsel_over(this)" style="width:60px;">
+						<div class="sub_dsel_in">
+							선택
+						</div>
+						<ul>
+							<li onClick = "dsel_liClick(this)">1</li>
+							<li onClick = "dsel_liClick(this)">2</li>
+							<li onClick = "dsel_liClick(this)">3</li>
+							<li onClick = "dsel_liClick(this)">4</li>
+							<li onClick = "dsel_liClick(this)">5</li>
+							<li onClick = "dsel_liClick(this)">6</li>
+							<li onClick = "dsel_liClick(this)">7</li>
+							<li onClick = "dsel_liClick(this)">8</li>
+							<li onClick = "dsel_liClick(this)">9</li>
+							<li onClick = "dsel_liClick(this)">10</li>
+						</ul>
+					</div>
+					<!-- //셀렉트 -->
+					<span class="pl5">Rows</span>
+					<span class="pc_r1 fw_b pl10">[1 to 9 / Total : 300]</span>
+					<span class="pc_r1">2018-03-12 08:40:01</span>
+				</div>
+				<div class="sub_tableTopBox_r">
+					<a href="javascript:;" class="btn_gray">
+						<span class="btn_gTxt">첨부파일 다운로드</span>
+					</a>
+					<a href="javascript:;" class="btn_gray">
+						<span class="btn_gTxt">결재요청</span>
+					</a>
+					<a href="javascript:;" class="btn_gray">
+						<span class="btn_gIcon del"></span>
+						<span class="btn_gTxt">Delate</span>
+					</a>
+				</div>
+			</div>
+			<!-- //테이블 top -->
+			<!-- 테이블 -->
+			<div class="sub_tableWrap type02 mt10">
+				<div class="tableWrap">
+					<table>
+						<colgroup>
+							<col width="63px" />
+							<col width="86px" />
+							<col width="auto" />
+							<col width="140px" />
+							<col width="140px" />
+							<col width="140px" />
+							<col width="140px" />
+							<col width="200px" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th><input type="checkbox"></th>
+								<th>User</th>
+								<th>Job ID</th>
+								<th>Job Code</th>
+								<th>Job Name</th>
+								<th>State A</th>
+								<th>Job Cancel</th>
+								<th>Request Date</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+								<th>Report</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s g"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center"><a href="javascript:;" class="btn_rec search"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s g"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center"><a href="javascript:;" class="btn_rec disabled search"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s b"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center"><a href="javascript:;" class="btn_rec pen"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s b"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center"><a href="javascript:;" class="btn_rec disabled pen"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s r"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center"><a href="javascript:;" class="btn_rec pen"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s y"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center"><a href="javascript:;" class="btn_rec pen"></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // 테이블 -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 테이블3 -->
+	<div class="area_box">
+		<h1>테이블3</h1>
+		<div class="view_div t">
+			<!-- 테이블 -->
+			<div class="sub_tableWrap type03">
+				<div class="tableWrap">
+					<table>
+						<colgroup>
+							<col width="40px" />
+							<col width="auto" />
+							<col width="200px" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th><input type="checkbox"></th>
+								<th>제목</th>
+								<th>다운로드</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td class="pl10">L7-2 75 4K 선행 제품 Pixel RGB OPC Sim 의뢰</td>
+								<td align="center"><a class="btn_rec down disabled" href="javascript:;"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td class="pl10">L7-2 75 4K 선행 제품 Pixel RGB OPC Sim 의뢰</td>
+								<td align="center"><a class="btn_rec down" href="javascript:;"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td class="pl10">L7-2 75 4K 선행 제품 Pixel RGB OPC Sim 의뢰</td>
+								<td align="center"><a class="btn_rec down" href="javascript:;"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td class="pl10">L7-2 75 4K 선행 제품 Pixel RGB OPC Sim 의뢰</td>
+								<td align="center"><a class="btn_rec down" href="javascript:;"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td class="pl10">L7-2 75 4K 선행 제품 Pixel RGB OPC Sim 의뢰</td>
+								<td align="center"><a class="btn_rec down" href="javascript:;"></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // 테이블 -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 테이블4 -->
+	<div class="area_box">
+		<h1>테이블4</h1>
+		<div class="view_div t">
+			<!-- 테이블 -->
+			<div class="sub_tableWrap type04">
+				<div class="tableWrap">
+					<table>
+						<colgroup>
+							<col width="auto" />
+							<col width="180px" />
+							<col width="100px" />
+							<col width="110px" />
+							<col width="110px" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Value</th>
+								<th>Split</th>
+								<th>Begin</th>
+								<th>End</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td rowspan="3" class="tp1">Folder 유저시간[hr]</td>
+								<td><input type="text" style="width:100%;" disabled value="홍길동"></td>
+								<td>
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											False
+										</div>
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<td><input type="text" style="width:100%;" disabled value="입력"></td>
+								<td><input type="text" style="width:100%;" disabled value="2019-04-20"></td>
+							</tr>
+							<tr>
+								<td><input type="text" style="width:100%;" disabled value="홍길동"></td>
+								<td>
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											False
+										</div>
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<td><input type="text" style="width:100%;" disabled value="입력"></td>
+								<td><input type="text" style="width:100%;" disabled value="2019-04-20"></td>
+							</tr>
+							<tr>
+								<td><input type="text" style="width:100%;"></td>
+								<td>
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											False
+										</div>
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<td><input type="text" style="width:100%;"></td>
+								<td><input type="text" style="width:100%;"></td>
+							</tr>
+							<tr>
+								<td class="tp1">PSA 물성</td>
+								<td><input type="text" style="width:100%;"></td>
+								<td>
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											False
+										</div>
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<td><input type="text" style="width:100%;"></td>
+								<td><input type="text" style="width:100%;"></td>
+							</tr>
+							<tr>
+								<td class="tp1">하부 PAD길이[mm]</td>
+								<td><input type="text" style="width:100%;"></td>
+								<td>
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											False
+										</div>
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<td><input type="text" style="width:100%;"></td>
+								<td><input type="text" style="width:100%;"></td>
+							</tr>
+							<tr>
+								<td class="tp1">PSA 물성</td>
+								<td><input type="text" style="width:100%;"></td>
+								<td>
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											False
+										</div>
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<td><input type="text" style="width:100%;"></td>
+								<td><input type="text" style="width:100%;"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // 테이블 -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 테이블5 -->
+	<div class="area_box">
+		<h1>테이블5</h1>
+		<div class="view_div t">
+			<!-- 테이블 -->
+			<div class="sub_tableWrap type04-1">
+				<div class="tableWrap">
+					<table>
+						<colgroup>
+							<col width="34%">
+							<col width="33%">
+							<col width="33%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Title</th>
+								<th>Split</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>KT2010A</th>
+								<td align="center">REQ-0001721</td>
+								<td align="center">201.1</td>
+							</tr>
+							<tr>
+								<th>KT2010A</th>
+								<td align="center">REQ-0001721</td>
+								<td align="center">201.1</td>
+							</tr>
+							<tr>
+								<th>KT2010A</th>
+								<td align="center">REQ-0001721</td>
+								<td align="center">201.1</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // 테이블 -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 테이블6 -->
+	<div class="area_box">
+		<h1>테이블 6</h1>
+		<div class="view_div t">
+			<!-- 테이블 -->
+			<div class="sub_tableWrap typePop">
+				<div class="tableWrap">
+					<table>
+						<colgroup>
+							<col width="180px" />
+							<col width="auto" />
+						</colgroup>
+						<tbody>
+							<tr>
+								<th align="right" class="pr10">제목</th>
+								<td><input type="text" style="width:100%;"></td>
+							</tr>
+							<tr>
+								<th align="right" valign="top" class="pr10 pt10">상신의견</th>
+								<td>
+									<textarea cols="30" rows="10" style="width:100%; height:270px;"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<th align="right" valign="top" class="pr10 pt10">결재자</th>
+								<td>
+									<div class="sub_txtBt sub_dsel">
+										<input class="sub_dsel_in" style="width: calc(100% - 24px);" type="text">
+										<input class="icon_person" type="button" onClick="dsel_over(this)">
+										<ul>
+											<li onclick="dsel_liClick(this)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+											<li onclick="dsel_liClick(this)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+											<li onclick="dsel_liClick(this)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+											<li onclick="dsel_liClick(this)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+											<li onclick="dsel_liClick(this)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+											<li onclick="dsel_liClick(this)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+										</ul>
+									</div>
+									<div class="sub_listBox mt10">
+										<div class="sub_lboxTop">[기안] 홍길동 과장 / CAE팀(디스플레이) / 삼성디스플레이</div>
+										<ul>
+											<li>
+												<div class="sub_lbConBox">
+													<div class="sRecWrap">
+														<input type="radio" id="r01-1" name="r1" class="btn_sRec" /><label for="r01-1">결재</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r01-2" name="r1" class="btn_sRec" /><label for="r01-2">합의</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r01-3" name="r1" class="btn_sRec" /><label for="r01-3">결재</label>
+													</div>
+												</div>
+												<p>
+													홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+												</p>
+												<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+											</li>
+											<li>
+												<div class="sub_lbConBox">
+													<div class="sRecWrap">
+														<input type="radio" id="r02-1" name="r2" class="btn_sRec" /><label for="r02-1">결재</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r02-2" name="r2" class="btn_sRec" /><label for="r02-2">합의</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r02-3" name="r2" class="btn_sRec" /><label for="r02-3">결재</label>
+													</div>
+												</div>
+												<p>
+													홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+												</p>
+												<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+											</li>
+											<li>
+												<div class="sub_lbConBox">
+													<div class="sRecWrap">
+														<input type="radio" id="r03-1" name="r3" class="btn_sRec" /><label for="r03-1">결재</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r03-2" name="r3" class="btn_sRec" /><label for="r03-2">합의</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r03-3" name="r3" class="btn_sRec" /><label for="r03-3">결재</label>
+													</div>
+												</div>
+												<p>
+													홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+												</p>
+												<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+											</li>
+											<li>
+												<div class="sub_lbConBox">
+													<div class="sRecWrap">
+														<input type="radio" id="r04-1" name="r4" class="btn_sRec" /><label for="r04-1">결재</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r04-2" name="r4" class="btn_sRec" /><label for="r04-2">합의</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r04-3" name="r4" class="btn_sRec" /><label for="r04-3">결재</label>
+													</div>
+												</div>
+												<p>
+													홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+												</p>
+												<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+											</li>
+											<li>
+												<div class="sub_lbConBox">
+													<div class="sRecWrap">
+														<input type="radio" id="r05-1" name="r5" class="btn_sRec" /><label for="r05-1">결재</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r05-2" name="r5" class="btn_sRec" /><label for="r05-2">합의</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r05-3" name="r5" class="btn_sRec" /><label for="r05-3">결재</label>
+													</div>
+												</div>
+												<p>
+													홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+												</p>
+												<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+											</li>
+											<li>
+												<div class="sub_lbConBox">
+													<div class="sRecWrap">
+														<input type="radio" id="r06-1" name="r6" class="btn_sRec" /><label for="r06-1">결재</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r06-2" name="r6" class="btn_sRec" /><label for="r06-2">합의</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r06-3" name="r6" class="btn_sRec" /><label for="r06-3">결재</label>
+													</div>
+												</div>
+												<p>
+													홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+												</p>
+												<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+											</li>
+											<li>
+												<div class="sub_lbConBox">
+													<div class="sRecWrap">
+														<input type="radio" id="r01-1" name="r7" class="btn_sRec" /><label for="r07-1">결재</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r07-2" name="r7" class="btn_sRec" /><label for="r07-2">합의</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r07-3" name="r7" class="btn_sRec" /><label for="r07-3">결재</label>
+													</div>
+												</div>
+												<p>
+													홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+												</p>
+												<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+											</li>
+											<li>
+												<div class="sub_lbConBox">
+													<div class="sRecWrap">
+														<input type="radio" id="r08-1" name="r8" class="btn_sRec" /><label for="r08-1">결재</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r08-2" name="r8" class="btn_sRec" /><label for="r08-2">합의</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r08-3" name="r8" class="btn_sRec" /><label for="r08-3">결재</label>
+													</div>
+												</div>
+												<p>
+													홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+												</p>
+												<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+											</li>
+											<li>
+												<div class="sub_lbConBox">
+													<div class="sRecWrap">
+														<input type="radio" id="r09-1" name="r9" class="btn_sRec" /><label for="r09-1">결재</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r09-2" name="r9" class="btn_sRec" /><label for="r09-2">합의</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r09-3" name="r9" class="btn_sRec" /><label for="r09-3">결재</label>
+													</div>
+												</div>
+												<p>
+													홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+												</p>
+												<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+											</li>
+											<li>
+												<div class="sub_lbConBox">
+													<div class="sRecWrap">
+														<input type="radio" id="r10-1" name="r10" class="btn_sRec" /><label for="r10-1">결재</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r10-2" name="r10" class="btn_sRec" /><label for="r10-2">합의</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r10-3" name="r10" class="btn_sRec" /><label for="r10-3">결재</label>
+													</div>
+												</div>
+												<p>
+													홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+												</p>
+												<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+											</li>
+											<li>
+												<div class="sub_lbConBox">
+													<div class="sRecWrap">
+														<input type="radio" id="r11-1" name="r11" class="btn_sRec" /><label for="r11-1">결재</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r11-2" name="r11" class="btn_sRec" /><label for="r11-2">합의</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r11-3" name="r11" class="btn_sRec" /><label for="r11-3">결재</label>
+													</div>
+												</div>
+												<p>
+													홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+												</p>
+												<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+											</li>
+											<li>
+												<div class="sub_lbConBox">
+													<div class="sRecWrap">
+														<input type="radio" id="r12-1" name="r12" class="btn_sRec" /><label for="r12-1">결재</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r12-2" name="r12" class="btn_sRec" /><label for="r12-2">합의</label>
+													</div>
+													<div class="sRecWrap">
+														<input type="radio" id="r12-3" name="r12" class="btn_sRec" /><label for="r12-3">결재</label>
+													</div>
+												</div>
+												<p>
+													홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+												</p>
+												<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+											</li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // 테이블 -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 테이블7 -->
+	<div class="area_box">
+		<h1>테이블 7</h1>
+		<div class="view_div t">
+			<!-- table -->
+			<div class="sub_tableWrap typePop2">
+				<div class="tableWrap">
+					<table>
+						<colgroup>
+							<col width="90px">
+							<col width="200px">
+							<col width="90px">
+							<col width="200px">
+							<col width="90px">
+							<col width="200px">
+							<col width="90px">
+							<col width="auto">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th align="center">제목</th>
+								<td colspan="7" class=""><input style="width:100%;" type="text"></td>
+							</tr>
+							<tr style="height:20px;">
+								<td colspan="8"></td>
+							</tr>
+							<tr>
+								<th align="center">요청자</th>
+								<td><input type="text" value="홍길동 Staff Engineer" style="width:calc(100% - 20px);" disabled /></td>
+								<th align="center">요청부서(팀)</th>
+								<td><input type="text" value="삼성디스플레이(CAE팀)" style="width:calc(100% - 20px);" disabled /></td>
+								<th align="center">요청부서(실)</th>
+								<td><input type="text" value="삼성디스플레이(제2연구실)" style="width:100% - 20px);" disabled /></td>
+								<th align="center">요청부서PL</th>
+								<td>
+									<div class="sub_txtBt" style="width:100%" >
+										<input style="width: calc(100% - 24px);" type="text" onFocus="javascript:$(this).parent().width('100%');">
+										<input class="icon_person" type="button">
+									</div>
+								</td>
+							</tr>
+							<tr style="height:20px;">
+								<td colspan="8"></td>
+							</tr>
+							<tr>
+								<th align="center">요청부서장</th>
+								<td>
+									<div class="sub_txtBt" style="width:calc(100% - 20px);">
+										<input style="width: calc(100% - 24px);" type="text">
+										<input class="icon_person" type="button">
+									</div>
+								</td>
+								<th align="center">요청부서Site</th>
+								<td>
+									<div class="sub_dsel" onclick="dsel_over(this)" style="width:calc(100% - 20px);">
+										<div class="sub_dsel_in">
+											All
+										</div>
+										<ul>
+											<li onclick="dsel_liClick(this)">True</li>
+											<li onclick="dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<th align="center">업무파트</th>
+								<td>
+									<div class="sub_dsel" onclick="dsel_over(this)" style="width:calc(100% - 20px);">
+										<div class="sub_dsel_in">
+											All
+										</div>
+										<ul>
+											<li onclick="dsel_liClick(this)">True</li>
+											<li onclick="dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<th align="center">해석분야(Info)</th>
+								<td>
+									<div class="sub_dsel" onclick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											All
+										</div>
+										<ul>
+											<li onclick="dsel_liClick(this)">True</li>
+											<li onclick="dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+							<tr style="height:20px;">
+								<td colspan="8"></td>
+							</tr>
+							<tr>
+								<th align="center">요청완료일</th>
+								<td>
+									<div class="fs_0" style="width:calc(100% - 20px)">
+										<input disabled="" class="input_cal" style="width: calc(100% - 24px);" type="text" value="2019-04-01">
+										<input class="icon_cal" type="button">
+									</div>
+								</td>
+								<th align="center">제품군</th>
+								<td colspan="5">
+									<div class="fs_0">
+										<div class="sub_dsel" onclick="dsel_over(this)" style="width:184px;">
+											<div class="sub_dsel_in">
+												All
+											</div>
+											<ul>
+												<li onclick="dsel_liClick(this)">True</li>
+												<li onclick="dsel_liClick(this)">False</li>
+											</ul>
+										</div>
+										<div class="sub_dsel ml20" onclick="dsel_over(this)" style="width:100px;">
+											<div class="sub_dsel_in">
+												All
+											</div>
+											<ul>
+												<li onclick="dsel_liClick(this)">True</li>
+												<li onclick="dsel_liClick(this)">False</li>
+											</ul>
+										</div>
+										<div class="sub_dsel ml10" onclick="dsel_over(this)" style="width:170px;">
+											<div class="sub_dsel_in">
+												All
+											</div>
+											<ul>
+												<li onclick="dsel_liClick(this)">True</li>
+												<li onclick="dsel_liClick(this)">False</li>
+											</ul>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr style="height:20px;">
+								<td colspan="8"></td>
+							</tr>
+							<tr>
+								<th align="center" valign="middle">결재정보 및<br />첨부파일</th>
+								<td colspan="7">
+									<div class="sub_halfBox">
+										<ul>
+											<li>
+												<div class="ta_r">
+													<a href="javascript:;" class="btn_purple">결재작성</a>
+												</div>
+												<div class="sub_listBox mt10">
+													<div class="sub_lboxTop">[기안] 홍길동 과장 / CAE팀(디스플레이) / 삼성디스플레이</div>
+													<ul>
+														<li data-id="01-2">
+															<div class="sub_lbConBox">
+																<div class="sRecWrap">
+																	<input type="radio" id="r01-1" name="r01" class="btn_sRec" />
+																	<label for="r01-1">결재</label>
+																</div>
+																<div class="sRecWrap">
+																	<input type="radio" id="r01-2" name="r01" class="btn_sRec" />
+																	<label for="r01-2">합의</label>
+																</div>
+																<div class="sRecWrap">
+																	<input type="radio" id="r01-3" name="r01" class="btn_sRec" />
+																	<label for="r01-3">결재</label>
+																</div>
+															</div>
+															<p>홍길동5 Engineer / CAE팀(디스플레이) / 삼성디스플레이</p>
+															<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+														</li>
+														<li data-id="02-2">
+															<div class="sub_lbConBox">
+																<div class="sRecWrap">
+																	<input type="radio" id="r02-1" name="r02" class="btn_sRec" />
+																	<label for="r02-1">결재</label>
+																</div>
+																<div class="sRecWrap">
+																	<input type="radio" id="r02-2" name="r02" class="btn_sRec" />
+																	<label for="r02-2">합의</label>
+																</div>
+																<div class="sRecWrap">
+																	<input type="radio" id="r02-3" name="r02" class="btn_sRec" />
+																	<label for="r02-3">결재</label>
+																</div>
+															</div>
+															<p>홍길동5 Engineer / CAE팀(디스플레이) / 삼성디스플레이</p>
+															<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+														</li>
+														<li data-id="03-2">
+															<div class="sub_lbConBox">
+																<div class="sRecWrap">
+																	<input type="radio" id="r03-1" name="r03" class="btn_sRec" />
+																	<label for="r03-1">결재</label>
+																</div>
+																<div class="sRecWrap">
+																	<input type="radio" id="r03-2" name="r03" class="btn_sRec" />
+																	<label for="r03-2">합의</label>
+																</div>
+																<div class="sRecWrap">
+																	<input type="radio" id="r03-3" name="r03" class="btn_sRec" />
+																	<label for="r03-3">결재</label>
+																</div>
+															</div>
+															<p>홍길동5 Engineer / CAE팀(디스플레이) / 삼성디스플레이</p>
+															<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+														</li>
+													</ul>
+												</div>
+											</li>
+											<li>
+												<div class="sub_fileListBoxBt">
+													<a href="javascript:;" class="btn_purple" onClick="fn_fileClick2(this)">첨부파일추가</a>
+													<a href="javascript:;" class="btn_purple" onClick="fn_fileAllremove(this)">전체삭제</a>
+													<input onchange="fn_fileChange2(this)" type="file">
+												</div>
+												<div class="sub_fileListBox mt10">
+													<ul>
+													</ul>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+							<tr style="height:20px;">
+								<td colspan="8"></td>
+							</tr>
+							<tr style="height:240px;">
+								<th align="center" valign="middle">요청내용</th>
+								<td colspan="7" class="d_td">
+									<textarea cols="30" rows="10" style="height:240px;" disabled>
+										■ 과제 목표
+										■ 요청 내용
+										■ 추진일정
+									</textarea>
+									<!-- div style="height:240px; font-size:18px; color:#ccc; line-height:240px; text-align:center; border:1px solid #ddd; background:#fbfbfb;">에디터 영역</div-->
+								</td>
+							</tr>
+							<tr style="height:20px;">
+								<td colspan="8"></td>
+							</tr>
+							<tr style="height:110px;">
+								<th align="center" valign="middle">기대효과</th>
+								<td colspan="7">
+									<table style="width:100%">
+										<colgroup>
+											<col width="33%" />
+											<col width="auto" />
+											<col width="33%" />
+										</colgroup>
+										<tbody>
+											<tr>
+												<td class="pr5">
+													<div class="input_number">
+														<dl>
+															<dt>Cost</dt>
+															<dd>
+																<input type="text" onKeydown="fn_numberformat(this)" onKeyup="fn_numberformat(this)" maxlength="7">
+																<span>백만원</span>
+															</dd>
+														</dl>
+													</div>
+													<textarea cols="30" rows="10" class="mt10" style="display:block; width:100%; height:90px;"></textarea>
+												</td>
+												<td class="pl5 pr5">
+													<div class="input_number">
+														<dl>
+															<dt>Cost</dt>
+															<dd>
+																<input type="text" onKeydown="fn_numberformat(this)" onKeyup="fn_numberformat(this)" maxlength="7">
+																<span>백만원</span>
+															</dd>
+														</dl>
+													</div>
+													<textarea cols="30" rows="10" class="mt10" style="display:block; width:100%; height:90px;"></textarea>
+												</td>
+												<td class="pl5">
+													<div class="input_number">
+														<dl>
+															<dt>Cost</dt>
+															<dd>
+																<input type="text" onKeydown="fn_numberformat(this)" onKeyup="fn_numberformat(this)" maxlength="7">
+																<span>백만원</span>
+															</dd>
+														</dl>
+													</div>
+													<textarea cols="30" rows="10" class="mt10" style="display:block; width:100%; height:90px;"></textarea>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // table -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 테이블8 -->
+	<div class="area_box">
+		<h1>테이블 8</h1>
+		<div class="view_div t">
+			<!-- table -->
+			<div class="sub_tableWrap type06">
+				<div class="tableWrap">
+					<table>
+						<colgroup>
+							<col width="auto" />
+							<col width="180px" />
+							<col width="100px" />
+							<col width="110px" />
+							<col width="110px" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th rowspan="2">Name</th>
+								<th>Value</th>
+								<th>Split</th>
+								<th>Begin</th>
+								<th>End</th>
+							</tr>
+							<tr>
+								<th>Value</th>
+								<th colspan="2">Begin</th>
+								<th>End</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td rowspan="3" class="tp1">Folder 유저시간[hr]</td>
+								<td><input type="text" style="width:100%;" disabled value="홍길동"></td>
+								<td>
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											False
+										</div>
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<td><input type="text" style="width:100%;" disabled value="입력"></td>
+								<td><input type="text" style="width:100%;" disabled value="2019-04-20"></td>
+							</tr>
+							<tr>
+								<td><input type="text" style="width:100%;" disabled value="홍길동"></td>
+								<td>
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											False
+										</div>
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<td><input type="text" style="width:100%;" disabled value="입력"></td>
+								<td><input type="text" style="width:100%;" disabled value="2019-04-20"></td>
+							</tr>
+							<tr>
+								<td><input type="text" style="width:100%;"></td>
+								<td>
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											False
+										</div>
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<td><input type="text" style="width:100%;"></td>
+								<td><input type="text" style="width:100%;"></td>
+							</tr>
+							<tr>
+								<td class="tp1">PSA 물성</td>
+								<td><input type="text" style="width:100%;"></td>
+								<td>
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											False
+										</div>
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<td><input type="text" style="width:100%;"></td>
+								<td><input type="text" style="width:100%;"></td>
+							</tr>
+							<tr>
+								<td class="tp1">하부 PAD길이[mm]</td>
+								<td><input type="text" style="width:100%;"></td>
+								<td>
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											False
+										</div>
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<td><input type="text" style="width:100%;"></td>
+								<td><input type="text" style="width:100%;"></td>
+							</tr>
+							<tr>
+								<td class="tp1">PSA 물성</td>
+								<td><input type="text" style="width:100%;"></td>
+								<td>
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											False
+										</div>
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<td><input type="text" style="width:100%;"></td>
+								<td><input type="text" style="width:100%;"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // table -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 리스트형 -->
+	<div class="area_box">
+		<h1>리스트형</h1>
+		<div class="view_div t">
+			<div class="sub_txtBt sub_dsel">
+				<input class="sub_dsel_in" style="width: calc(100% - 24px);" type="text">
+				<input class="icon_person" type="button" onClick="dsel_over(this)">
+				<ul>
+					<li onclick="dsel_liClick(this,true)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+					<li onclick="dsel_liClick(this,true)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+					<li onclick="dsel_liClick(this,true)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+					<li onclick="dsel_liClick(this,true)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+					<li onclick="dsel_liClick(this,true)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+					<li onclick="dsel_liClick(this,true)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+				</ul>
+			</div>
+			<div class="sub_listBox mt10">
+				<div class="sub_lboxTop">[기안] 홍길동 과장 / CAE팀(디스플레이) / 삼성디스플레이</div>
+				<ul></ul>
+			</div>
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 리스트형2 -->
+	<div class="area_box">
+		<h1>리스트형2</h1>
+		<div class="view_div t">
+			<div>
+				<div class="ta_r">
+					<a href="javascript:;" class="btn_purple">결재작성</a>
+				</div>
+				<div class="sub_listBox mt10">
+					<div class="sub_lboxTop">[기안] 홍길동 과장 / CAE팀(디스플레이) / 삼성디스플레이</div>
+					<ul>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sRecWrap">
+								<input type="radio" id="tr-1" name="tr-1" class="btn_sRec" /><label for="tr-1">결재</label>
+							</div>
+							<div class="sRecWrap">
+								<input type="radio" id="tr-2" name="tr-2" class="btn_sRec" /><label for="tr-2">합의</label>
+							</div>
+							<div class="sRecWrap">
+								<input type="radio" id="tr-3" name="tr-3" class="btn_sRec" /><label for="tr-3">결재</label>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 파일 리스트 -->
+	<div class="area_box">
+		<h1>파일 리스트</h1>
+		<div class="view_div t">
+			<div>
+				<div class="sub_fileListBoxBt">
+					<a href="javascript:;" class="btn_purple" onClick="fn_fileClick2(this)">첨부파일추가</a>
+					<a href="javascript:;" class="btn_purple" onClick="fn_fileAllremove(this)">전체삭제</a>
+					<input onchange="fn_fileChange2(this)" type="file">
+				</div>
+				<div class="sub_fileListBox mt10">
+					<ul>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 디스크립션 -->
+	<div class="area_box">
+		<h1>디스크립션</h1>
+		<div class="view_div t">
+			<!-- description box -->
+			<div class="des_box">
+				<div class="top">
+					<h3>Application 현황 </h3>
+					<ul class="des_area">
+						<li>
+							<span class="icon_circle s r2" style="margin-top:4px;"></span>
+							<span class="fs_12">진행중</span>
+						</li>
+						<li>
+							<span class="icon_circle s p" style="margin-top:4px;"></span>
+							<span>의뢰중</span>
+						</li>
+						<li>
+							<span class="icon_circle s bg" style="margin-top:4px;"></span>
+							<span>완료</span>
+						</li>
+					</ul>
+				</div>
+				<div class="mt15" style="padding:50px 0; font-size:18px; color:#ccc; text-align:center; background:#fafbfd;">
+					차트영역
+				</div>
+			</div>
+			<!-- // description box -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	<!-- 페이징 -->
+	<div class="area_box">
+		<h1>페이징</h1>
+		<div class="view_div t">
+			<!-- 페이징 -->
+			<div class="sub_pasing">
+				<a href="javascript:;" class="p"></a>
+				<a href="javascript:;" class="pp"></a>
+				<a href="javascript:;" class="sel">1</a>
+				<a href="javascript:;">2</a>
+				<a href="javascript:;">3</a>
+				<a href="javascript:;" class="ooo"></a>
+				<a href="javascript:;" class="n"></a>
+				<a href="javascript:;" class="nn"></a>
+			</div>
+			<!-- //페이징 -->
+		</div>
+		<textarea cols="30" rows="10" class="source_txt" readonly>
+		</textarea>
+	</div>
+	
+</body>
+</html>

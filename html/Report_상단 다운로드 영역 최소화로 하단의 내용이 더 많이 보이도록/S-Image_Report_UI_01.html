@@ -1,0 +1,363 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="../../css/common2.css" />
+	<link rel="stylesheet" href="../../css/main2.css" />
+	<link rel="stylesheet" href="../../css/ko.css" />
+	<style></style>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="../../js/ko.js"></script>
+	<script type="text/javascript" src="../../js/answer_common.js"></script>
+	<script>
+		$(function(){
+			lnbapp();/* 퍼블 관련 lnb셋팅*/
+			fn_tHeadCheck();
+		});
+	</script>
+</head>
+<body onClick="fn_Click_remove(this)" onResize="fn_tapResize()" onLoad="fn_tapResize()">
+	<div class="answer_nt">
+		<div class="answer_ntWrap">
+			<div>
+				<div class="sub_tableTopBox mb5">
+					<div class="sub_tableTopBox_l pt5">
+						<span class="pc_r1 fw_b">[1 to 9 / Total : 300]</span>
+						<span class="pc_r1">2018-03-12 08:40:01</span>
+					</div>
+					<div class="sub_tableTopBox_r">
+					    <a class="btn_white s" href="javascript:;"><span class="btn_gTxt">선택 다운로드</span></a>
+						
+					</div>
+				</div>
+				<div class="line4">
+					<!-- 테이블 -->
+					<div class="sub_tableWrap type03">
+						<div class="tableWrap">
+							<table>
+								<colgroup>
+									<col width="40px" />
+									<col width="auto" />
+									<col width="200px" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th><input type="checkbox"></th>
+										<th>제목</th>
+										<th>다운로드</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+						<div class="tableWrap o_auto" style="max-height:110px;">
+							<table>
+								<colgroup>
+									<col width="40px" />
+									<col width="auto" />
+									<col width="200px" />
+								</colgroup>
+								<tbody>
+									<tr>
+										<td align="center"><input type="checkbox"></td>
+										<td class="pl10">L7-2 75 4K 선행 제품 Pixel RGB OPC Sim 의뢰</td>
+										<td align="center"><a title="download" class="btn_comm" href="javascript:;" alt="download"><i class="fa fa-download"></i></a></td>
+									</tr>
+									<tr>
+										<td align="center"><input type="checkbox"></td>
+										<td class="pl10">L7-2 75 4K 선행 제품 Pixel RGB OPC Sim 의뢰</td>
+										<td align="center"><a title="download" class="btn_comm" href="javascript:;" alt="download"><i class="fa fa-download"></i></a></td>
+									</tr>
+									<tr>
+										<td align="center"><input type="checkbox"></td>
+										<td class="pl10">L7-2 75 4K 선행 제품 Pixel RGB OPC Sim 의뢰</td>
+										<td align="center"><a title="download" class="btn_comm" href="javascript:;" alt="download"><i class="fa fa-download"></i></a></td>
+									</tr>
+									<tr>
+										<td align="center"><input type="checkbox"></td>
+										<td class="pl10">L7-2 75 4K 선행 제품 Pixel RGB OPC Sim 의뢰</td>
+										<td align="center"><a title="download" class="btn_comm" href="javascript:;" alt="download"><i class="fa fa-download"></i></a></td>
+									</tr>
+									<tr>
+										<td align="center"><input type="checkbox"></td>
+										<td class="pl10">L7-2 75 4K 선행 제품 Pixel RGB OPC Sim 의뢰</td>
+										<td align="center"><a title="download" class="btn_comm" href="javascript:;" alt="download"><i class="fa fa-download"></i></a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!-- // 테이블 -->
+					<!-- folder btn -->
+					<div class="sub_tableFold">
+						<a class="stf_btn" onClick="fn_tbFold(this)" href="javascript:;"></a>
+					</div>
+				</div>
+			</div>
+			
+			<!-- tap -->
+			<div class="as_tap mt20" >
+				<ul class="as_tapBt_wrap">
+				    <!-- <div class="tab-btngrp">
+				    <a class="btn_white" href="javascript:;"><span class="btn_gTxt"><i class="fa fa-refresh"></i>Refresh</span></a> 
+				    <a class="btn_blue2" href="javascript:;"><span class="btn_gTxt">Run Paraview</span></a>
+				    </div> -->
+					<li class="on">
+						<a onclick="fn_Click_tap(this)" href="javascript:;">Result</a>
+					</li>
+					<li>
+						<a onclick="fn_Click_tap(this)" href="javascript:;">Input 확인</a>
+					</li>
+					
+				</ul>
+				<ul class="as_tapCon2_wrap">
+				    
+					<li class="on">
+						<div class="as_tabCon">
+						
+							<div class="mt20">
+	 						   <div style="width:100%">
+									
+									<!-- left -->
+									<div  style="float:left;width:50%;height: 100%;padding-right:20px;" >
+									    <h4 class="as_lineTit">Result Data</h4>	
+									        <dl class="sub_dtdd mt10" style="display:inline-block;padding-left:20px;">
+									            <dt class="" style="float:left;width:100px!important">
+										            Chart
+									            </dt>
+									            </dl>
+									    
+									        <div style="background:#ffffff;  text-align: center;margin-top:10px;">
+									        
+									            <div id="graph2" style="width: 100%; position: relative;">
+                              	            
+                              	                    <svg xmlns="http://www.w3.org/2000/svg" width="540" height="330">
+                              	                    </svg>
+                              	                    <div class="tooltip" style="padding: 5px; border-radius: 5px; color: white; font-size: 11px; position: absolute; opacity: 0; background-color: black;"></div>
+                              	            
+                              	                </div>
+                              	                
+                              	                <div class="mt10" style="position: relative;"> 
+                              	                    <ul class="chart-option" style="width:100%;padding-left:20px;">
+                              	                    <li>
+                              	                    <span class="gap_txt" style="width: 45px; font-size: 15px;">x-axis</span> 
+                              	                    <input class="re_st_cal" id="re_st_cal_x2" style="width: 60px;" type="text" value=""> <span class="gap_txt">~</span> <input class="re_ed_cal" id="re_ed_cal_x2" style="width: 60px;" type="text" value=""> 
+                              	                    <span class="gap_txt ml10" style="width: 45px; font-size: 15px;">y-axis</span> 
+                              	                    <input class="re_st_cal" id="re_st_cal_y2" style="width: 60px;" type="text" value=""> 
+                              	                    <span class="gap_txt">~</span> <input class="re_ed_cal" id="re_ed_cal_y2" style="width: 60px;" type="text" value="">
+                              	                    </li>
+                              	                   
+                              	                    
+                              	                    </ul>
+                              	                </div>
+									        </div>
+									        
+									        
+			
+									        <!-- 테이블 -->
+									        <div class="sub_tableWrap type02 mt10" style="height:180px;overflow-y:auto">
+										        <div class="tableWrap">
+											        <table>
+												        <colgroup>
+													        <col width="50">
+													        <col width="">
+													        <col width="">
+													        <col width="">
+													        <col width="">
+												        </colgroup>
+												        <thead>
+													        <tr>
+														        <th>Index</th>
+														        <th>Job Code</th>
+														        <th>Param</th>
+														        <th>Value</th>
+														        <th>Result</th>
+													        </tr>
+												        </thead>
+												        <tbody>
+													        <tr>
+														        <td align="center">0</td>
+														        <td align="center">reference</td>
+														        <td align="center">-</td>
+														        <td align="center">-</td>
+														        <td align="center">10%</td>
+													        </tr>
+													        <tr>
+														        <td align="center">1</td>
+														        <td align="center">reference</td>
+														        <td align="center">-</td>
+														        <td align="center">-</td>
+														        <td align="center">10%</td>
+													        </tr>
+													        <tr>
+														        <td align="center">2</td>
+														        <td align="center">reference</td>
+														        <td align="center">-</td>
+														        <td align="center">-</td>
+														        <td align="center">10%</td>
+													        </tr>
+													        <tr>
+														        <td align="center">3</td>
+														        <td align="center">reference</td>
+														        <td align="center">-</td>
+														        <td align="center">-</td>
+														        <td align="center">10%</td>
+													        </tr>
+													        <tr>
+														        <td align="center">4</td>
+														        <td align="center">reference</td>
+														        <td align="center">-</td>
+														        <td align="center">-</td>
+														        <td align="center">10%</td>
+													        </tr>
+												        </tbody>
+											        </table>
+										        </div>
+									        </div>
+									        <!-- // 테이블 -->
+		
+									    
+									</div>
+									<!-- // left -->
+									
+									<!-- right -->
+									<div  style="float:right;width:50%;height: 100%;" >
+									    <h4 class="as_lineTit">Simulation Variable</h4>	
+									    <ul class="sub_sblb_wrap">
+						                    <!-- box1 -->
+						                    <li style="width:50%">
+									            <dl class="sub_dtdd mt10" style="display:inline-block;padding-left:20px;width:100%">
+									                <dt class="" style="float:left;width:20%!important">
+										            Split Index
+									                </dt>
+									                <dd class="" style="float:left;width:70%">
+										                <div class="sub_dsel" onClick="dsel_over(this)">
+											            <input type="text" class="sub_dsel_in" style="width:100%" />
+											            <ul>
+												            <li onClick = "dsel_liClick(this)">True</li>
+												            <li onClick = "dsel_liClick(this)">False</li>
+											            </ul>
+										                </div>
+									                </dd>
+									            </dl>
+									        </li>
+									        <li style="width:50%">
+									            <dl  class="sub_dtdd mt10" style="display:inline-block;padding-left:20px;width:100%">
+									                <dt class="pl20" style="float:left;width:20%!important">
+										            Input Data
+									                </dt>
+									                <dd class="mr10" style="float:left;width:60%">
+										            <div class="sub_dsel" onClick="dsel_over(this)">
+											            <input type="text" class="sub_dsel_in" style="width:100%" />
+											            <ul>
+												            <li onClick = "dsel_liClick(this)">True</li>
+												            <li onClick = "dsel_liClick(this)">False</li>
+											            </ul>
+										            </div>
+									                </dd>
+									                <dd style="float:right;margin-right:10px;">
+									                    <a class="btn_white s" href="javascript:;"><span class="btn_gTxt">View</span></a>
+									                </dd>
+								                </dl>
+								            </li>
+														
+									    </ul>	
+											
+										<ul>
+											<li style="width:72%;height:100%;float:left">
+												
+												<div style="background: #fff;  text-align: center;margin-top:10px;">
+									        
+									                <div id="graph2" style="width: 100%; position: relative;">
+                              	            
+                              	                        <svg xmlns="http://www.w3.org/2000/svg" width="540" height="330">
+                              	                        </svg>
+                              	                        <div class="tooltip" style="padding: 5px; border-radius: 5px; color: white; font-size: 11px; position: absolute; opacity: 0; background-color: black;"></div>
+                              	            
+                              	                    </div>
+                              	                
+                              	                    <div class="mt10" style="position: relative;"> 
+                              	                    <ul class="chart-option" style="width:100%;padding-left:20px;">
+                              	                    <li>
+                              	                    <span class="gap_txt" style="width: 45px; font-size: 15px;">x-axis</span> 
+                              	                    <input class="re_st_cal" id="re_st_cal_x2" style="width: 60px;" type="text" value=""> <span class="gap_txt">~</span> <input class="re_ed_cal" id="re_ed_cal_x2" style="width: 60px;" type="text" value=""> 
+                              	                    <span class="gap_txt ml10" style="width: 45px; font-size: 15px;">y-axis</span> 
+                              	                    <input class="re_st_cal" id="re_st_cal_y2" style="width: 60px;" type="text" value=""> 
+                              	                    <span class="gap_txt">~</span> <input class="re_ed_cal" id="re_ed_cal_y2" style="width: 60px;" type="text" value="">
+                              	                    <input type="checkbox" class="check-common" id="a01"><label for="a01" class="mr20">Log-scale</label>
+                              	                    </li>
+                              	                   
+                              	                    </ul>
+                              	                    </div>
+									            </div>
+												
+											</li>
+											<li style="width:25%;float:left;margin-left:20px;">
+	
+												
+											<!-- 테이블 -->
+									        <div class="sub_tableWrap type02" style="height:545px;overflow-y:auto;margin-top:40px;">
+										        <div class="tableWrap" style="border-bottom:1px solid #d6d6d6;">
+											        <table>
+												        <colgroup>
+													        <col width="">
+													        <col width="">
+												        </colgroup>
+												        <thead>
+													        <tr>
+														        <th>A/㎠ </th>
+														        <th>cd/A</th>
+													        </tr>
+												        </thead>
+												        <tbody>
+													        <tr>
+														        <td align="center">0</td>
+														        <td align="center">reference</td>
+													        </tr>
+													        <tr>
+														        <td align="center">1</td>
+														        <td align="center">reference</td>
+													        </tr>
+													        <tr>
+														        <td align="center">2</td>
+														        <td align="center">reference</td>
+													        </tr>
+													        <tr>
+														        <td align="center">3</td>
+														        <td align="center">reference</td>
+													        </tr>
+													        <tr>
+														        <td align="center">4</td>
+														        <td align="center">reference</td>
+													        </tr>
+												        </tbody>
+											        </table>
+										        </div>
+									        </div>
+									        <!-- // 테이블 -->
+											</li>
+										</ul>
+										
+									    <div style="background: rgb(250, 251, 253);  text-align: center;margin-top:20px;">
+									    </div>
+									</div>
+									<!--// right -->
+									
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div>
+							<p style="border: 1px solid rgb(237, 237, 237); border-image: none; height: 100%; text-align: center; color: black; font-size: 20px; font-weight: bold;">B</p>
+						</div>
+					</li>
+					
+				</ul>
+			</div>
+			<!-- //tap -->
+
+		</div>
+	</div>
+</body>
+</html>

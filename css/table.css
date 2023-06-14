@@ -1,0 +1,25 @@
+div.handsontable thead tr:first-child th, div.handsontable thead tr:first-child td{border-top:1px solid #394f68 !important; border-bottom:1px solid #d6d6d6 !important;}
+
+div.htRowHeaders.handsontable thead tr th:nth-child(2){border-left-width:0;}
+
+div > .handsontable thead th{background:#fff;}
+div > .handsontable tbody th, div.handsontable tbody th, div.handsontable td{background:transparent;}
+
+.handsontable thead th div.relative{padding:6px 0 9px 0;}
+
+
+div.handsontable th, div.handsontable td, div.handsontable tr:first-child th, div.handsontable tr:first-child td{border-width:0px;}
+.ht_clone_left div.handsontable tr th:first-child , .ht_clone_left div.handsontable tr td:first-child{border-left:1px solid #d6d6d6 !important;}
+div.handsontable tbody tr:nth-child(even), div.handsontable tbody tr:nth-child(even) {background:#f3f5f7;}
+
+div.handsontable th, div.handsontable td{border-width:0;}
+
+div.handsontable th:first-child, div.handsontable tr td:first-of-type, div.handsontable .htNoFrame + th, .handsontable .htNoFrame + td{border-width:0px;}
+div.handsontable th:first-child, div.handsontable tr td:first-child{border-left:1px solid #ccc;}
+
+#div2 div.handsontable tr th:first-child, div.handsontable tr td:first-child{border-left-width:0px;}
+
+div.handsontable .wtSpreader{border-bottom:1px solid #d6d6d6; border-right:1px solid #d6d6d6;}
+
+.setH_150 {height:calc(100% - 150px) !important; overflow:auto;}
+.setH_192{height:calc(100% - 192px) !important; overflow:auto;}

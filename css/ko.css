@@ -1,0 +1,33 @@
+.s_wrap > ul{position:relative;height:200%;}
+.s_wrap > ul > li{position:relative; text-align:center; height:50%; color:white;}
+.s_wrap.ver2 > ul > li{height:100%;}
+.s_wrap > ul > li:first-child{font-size:30px; font-weight:bold;}
+.s_wrap > ul > li:nth-child(2){font-size:30px; font-weight:bold;}
+
+.exid{font-size:100px; font-weight:bold;}
+
+.ok_scroll_moveWrap_p > ul > li:hover{/*background:rgba(255,255,255,0.6);*/}
+.ok_scroll_moveWrap_p > ul > li.on{border-color:#fff !important; color:#fff !important;}
+
+
+
+.s_wrap_moveWrap_p > ul > li{position:relative; width:96px; height:96px; line-height:94px; font-family:"Open Sans"; font-size:16px; color:#fff; text-align:center; font-weight:bold; border-radius:100%; border:none; cursor:pointer; background:#6d7889;}
+.s_wrap_moveWrap_p > ul > li:hover{background:#526178; color:white;}
+.s_wrap_moveWrap_p > ul > li.on{background:#00a6ba; color:white;}
+.s_wrap_moveWrap_p > ul > li + li{margin-top:30px;}
+.s_wrap_moveWrap_p > ul > li:after{content:""; position:absolute; left:96px;  top:50%; display:none; width:275px; height:1px; background:#30b5c6;}
+.s_wrap_moveWrap_p > ul > li.on:after{display:block;}
+
+.downBtn:after{content:"SCROLL"; position:absolute; bottom:-36px; left:0; display:block; width:100%; text-align:center; color:rgba(255,255,255,0.6); font-size:14px;}
+
+.ok_scroll_moveWrap_p ul li + li{border-left-width:0 !important}
+
+.main2_rolling_moveWrap_p.exid > ul > li{vertical-align:middle;}
+.main2_rolling_moveWrap_p.exid > ul > li.on{border-color:#999999; background:#4f5f6f;}
+.main2_rolling_moveWrap_p.exid > ul > li:hover{background:#4f5f6f;}
+.main2_rolling_moveWrap_p.exid > ul > li + li{margin-left: 8px;}
+.ko_player{display:inline-block; width:16px; height:16px;border:1px solid #aaaaaa; border-radius:100%; verticalAlien:middle; cursor:pointer; background:url(/caeweb/portal/img/playerIcon_stop.png) no-repeat center center;}
+.ko_player:hover{border-color:#00a6ba;  background:#fff url(/caeweb/portal/img/playerIcon_stop_over.png) no-repeat center center !important;}
+.ko_player.ppp{background-image:url(/caeweb/portal/img/playerIcon_play.png);}
+.ko_player.ppp:hover{background-image:url(/caeweb/portal/img/playerIcon_play_over.png) !important;}
+

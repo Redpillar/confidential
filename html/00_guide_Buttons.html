@@ -1,0 +1,2430 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="../css/common2.css" />
+	<link rel="stylesheet" href="../css/main.css" />
+	<link rel="stylesheet" href="../css/ko.css" />
+	<style>
+		body{padding:40px 20px 20px;}
+		body > h1{font-size:30px; text-align:center; padding:0 0 60px 0;}
+		.gnb{position:fixed; top:0; right:17px; z-index:100; padding:20px 0; width:180px; min-width:auto; box-shadow:0 0 10px 0 rgba(0,0,0,0.4); text-align:center; background:#fff;}
+		.gnb > span{display:inline-block; padding:2px 0 0; font-size:15px; font-weight:bold;}
+		.gnb > select{width:80%; font-size:14px;}
+		.gnb > ul{display:flex; justify-content:center; align-items:center; height:100%;}
+		.gnb > ul > li{display:inline-block; cursor:pointer;}
+		.gnb > ul > li + li{margin-left:7px; padding-left:8px; border-left:1px solid #999;}
+		body > div{padding:30px; min-width:800px;}
+		body > div > h1{padding-bottom:15px;}
+		h1 + .view_div{margin-top:30px;}
+		.hbox > li{padding:15px 0 0 0;}
+
+		.hbox > li + li{padding-top:35px; margin-top:45px; border-top:1px dotted black;}
+		.hbox.type2{font-size:0;}
+		.hbox.type2 > li{display:inline-block; padding-top:0; margin-top:35px; width:180px; vertical-align:top; text-align:center;}
+		.hbox.type2 > li + li{padding-top:0; border-top-width:0;}
+		.hbox.type2 > li .view_div{height:75px;}
+		.view_div{position:relative; z-index:1; padding:0 0 10px 0;}
+		.view_div:after, .view_div:before{position:absolute; left:-5px; padding:0 5px; display:block; font-size:11px; border-radius:3px; border:1px solid #ededed; box-shadow:3px 3px 5px 1px rgba(0,0,0,0.2); background:#fff;}
+		.view_div:after{content:"view"; top:-18px;}
+		.view_div:before{content:"source"; bottom:-37px;}
+		.area_box{border:1px solid #ededed;}
+		.area_box + .area_box{margin-top:20px;}
+		.source_txt{position:relative; display:block; padding:15px 0; margin:30px 0 0 0; width:100%; height:100px; white-space:pre;}
+		.bcb{background:black;}
+		.txt-sub {font-size:14px;line-height:22px;}
+		.sub_tableWrap > .tableWrap tr:hover td {background:none;}
+		.hbox > li + li
+	</style>
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="../js/ko.js"></script>
+	<script type="text/javascript" src="../js/answer_common.js"></script>
+	<script>
+		$(function(){
+			$(".view_div").each(function(){
+				var html = $(this).html();
+				if(!$(this).hasClass("t")){
+					html = html.replace(/\n/g,'');
+					html = html.replace(/\t/g,'');
+				};
+				$(this).parent().find(".source_txt").html(html);
+			});
+			$(".area_box > h1").each(function(index,node){
+				var source = "<option>" + $(node).text() + "</option>";
+				$(".gnb select").append(source);
+			});
+			$(".source_txt").click(function(){
+				$(this).select();
+			});
+		});
+		function fn_l(el){
+			var txt1 = $(el).val();
+			var n = 0;
+			var top = 0;
+			if(txt1 != "top"){
+				$(".area_box > h1").each(function(index,node){
+					var that = $(node);
+					var txt2 = that.text();
+					if(txt1 == txt2){
+						top = $(node).offset().top + $("body").scrollTop();
+						n = index;
+						return false;
+					};
+				});
+				$("body").scrollTop(top - 50);
+			}else{
+				$("body").scrollTop(0);
+			};
+		};
+	</script>
+
+</head>
+<body onClick="fn_Click_remove(this)" onScroll="fn_remove()" style="overflow:auto;">
+	<h1>퍼블 GUIDE</h1>
+	<div class="gnb">
+		<span>바로가기</span>
+		<select onChange='fn_l(this)'>
+			<option>top</option>
+		</select>
+	</div>
+
+
+	<!-- Primary Button -->
+	<div class="area_box">
+		<h1>Primary Button</h1>
+        <p class="txt-sub">
+        · 화면에서 가장 핵심적인 역할을 수행(저장,완료 등)하는 버튼<br>
+        · 한 화면에 하나의 Primary를 권장<br>
+        · Primary버튼은 다른 버튼과 시각적으로 명확하게 구별될 수 있도록 구성<br>
+        · 버튼은 우정렬을 기본으로 하며 Basic버튼과 혼용 시 Primary Button을 최우측으로 배치
+        </p>
+		<ul class="hbox">
+			<li>
+
+			<!-- 테이블 -->
+			<div class="sub_tableWrap">
+				<div class="tableWrap">
+					<table>
+						<colgroup>
+							<col width="auto">
+							<col width="15%">
+							<col width="15%">
+							<col width="15%">
+							<col width="15%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>e.g.</th>
+								<th>normal</th>
+								<th>hover/focused</th>
+								<th>readonly</th>
+								<th>disabled</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="ta_c" style="height:60px">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_white" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        <a class="btn_white" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        <a class="btn_blue2" href="javascript:;"><span class="btn_gTxt">Primary BTN</span></a>
+					                        </div>
+					                        <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+					                    </li>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_blue2" href="javascript:;"><span class="btn_gTxt">Primary BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_blue2" href="javascript:;" style="background:#005fb3"><span class="btn_gTxt">Primary BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_blue2" href="javascript:;" readonly><span class="btn_gTxt">Primary BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_blue2" href="javascript:;" disabled><span class="btn_gTxt">Primary BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+							</tr>
+							<tr>
+								<td class="ta_c" style="height:60px">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_white" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+                                            <a class="btn_white" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        <a class="btn_blue2" href="javascript:;">
+						                    <span class="btn_gTxt"><i class="fa fa-commenting"></i>Primary BTN</span>
+					                        </a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_blue2" href="javascript:;">
+								            <span class="btn_gTxt"><i class="fa fa-commenting"></i>Primary BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_blue2" href="javascript:;" style="background:#005fb3"><span class="btn_gTxt"><i class="fa fa-commenting"></i>Primary BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_blue2" href="javascript:;" readonly><span class="btn_gTxt"><i class="fa fa-commenting"></i>Primary BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_blue2" href="javascript:;" disabled><span class="btn_gTxt"><i class="fa fa-commenting"></i>Primary BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // 테이블 -->
+
+
+
+			</li>
+
+		</ul>
+		</ul>
+		<!-- Primary Icon 버튼 -->
+		<ul class="hbox type2 type2">
+		    <li>
+				<div class="view_div">
+					<a class="btn_blue2" href="javascript:;"><span class="btn_gTxt"><i class="fa fa-commenting"></i>Comment</span></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>
+	</div>
+	<!--// Primary Button -->
+
+	<!-- Basic Button -->
+	<div class="area_box">
+		<h1>Basic Button</h1>
+        <p class="txt-sub">
+        · 화면에서 기본 역할을 수행 (e.g. 삭제, 목록, 이전 등)하는 버튼<br>
+        · 한 화면에 여러 개의 Basic 버튼이 혼용될 수 있다.<br>
+        · Icon이 있는 타입과 없는 타입으로 나뉜다.<br>
+        · Primary 버튼과 혼용시에는 아이콘을 적용하지 않는다.<br>
+        · 예외적용) Refresh/Excel 등의 일부 기능버튼은 예외로 한다.
+        </p>
+		<ul class="hbox">
+			<li>
+
+			<!-- 테이블 -->
+			<div class="sub_tableWrap">
+				<div class="tableWrap">
+					<table>
+						<colgroup>
+							<col width="auto">
+							<col width="15%">
+							<col width="15%">
+							<col width="15%">
+							<col width="15%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>e.g.</th>
+								<th>normal</th>
+								<th>hover/focused</th>
+								<th>readonly</th>
+								<th>disabled</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="ta_c" style="height:60px">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_white" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        <a class="btn_white" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        <a class="btn_white" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_white" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_white" href="javascript:;" style="border:1px solid #666;"><span class="btn_gTxt">BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_white" href="javascript:;" readonly><span class="btn_gTxt">BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								     <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_white" href="javascript:;" disabled><span class="btn_gTxt">BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+							</tr>
+							<tr>
+								<td class="ta_c" style="height:60px">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_white" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        <a class="btn_white" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        <a href="javascript:;" class="btn_white"><span class="btn_gTxt"><i class="icon-uniE609"></i>BTN</span></a>
+					                        </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a href="javascript:;" class="btn_white"><span class="btn_gTxt"><i class="icon-uniE609"></i>BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a href="javascript:;" class="btn_white" style="border:1px solid #666;"><span class="btn_gTxt"><i class="icon-uniE609"></i>BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a href="javascript:;" class="btn_white" readonly><span class="btn_gTxt"><i class="icon-uniE609"></i>BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a href="javascript:;" class="btn_white" disabled><span class="btn_gTxt"><i class="icon-uniE609"></i>BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // 테이블 -->
+
+
+
+			</li>
+
+		</ul>
+		<!-- Basic Icon 버튼 -->
+		<ul class="hbox type2 type2">
+		    <li>
+				<div class="view_div">
+					<a class="btn_white" href="javascript:;"><span class="btn_gTxt"><i class="fa fa-refresh"></i>Refresh</span></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+		</ul>
+	</div>
+	<!--// Basic Button -->
+
+	<!-- Inner Button -->
+	<div class="area_box">
+		<h1>Inner Button</h1>
+        <p class="txt-sub">
+        · Table, List 등 Contents 내부에서 사용되는 버튼<br>
+        · 본문 Contents와 시각적으로 구분될 수 있도록 구성하며, 일반 Button에 비해 작은 크기로 구성한다.
+        </p>
+		<ul class="hbox">
+			<li>
+
+			<!-- 테이블 -->
+			<div class="sub_tableWrap">
+				<div class="tableWrap">
+					<table>
+						<colgroup>
+							<col width="auto">
+							<col width="15%">
+							<col width="15%">
+							<col width="15%">
+							<col width="15%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>e.g.</th>
+								<th>normal</th>
+								<th>hover/focused</th>
+								<th>readonly</th>
+								<th>disabled</th>
+							</tr>
+						</thead>
+						<tbody>
+						    <tr>
+								<td class="ta_c" style="height:60px">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_white s" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        <a class="btn_white s" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        <a class="btn_graynew s" href="javascript:;"><span class="btn_gTxt"><i class="fa fa-search"></i>Search</span></a>
+					                        </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_graynew s" href="javascript:;"><span class="btn_gTxt"><i class="fa fa-search"></i>Search</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_graynew s" href="javascript:;" style="background:#767676;"><span class="btn_gTxt"><i class="fa fa-search"></i>Search</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_graynew s" href="javascript:;" readonly><span class="btn_gTxt"><i class="fa fa-search"></i>Search</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								     <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_graynew s" href="javascript:;" disabled><span class="btn_gTxt">BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+							</tr>
+							<tr>
+								<td class="ta_c" style="height:60px">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_white s" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        <a class="btn_white s" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        <a class="btn_graynew s" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_graynew s" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_graynew s" href="javascript:;" style="background:#767676;"><span class="btn_gTxt">BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_graynew s" href="javascript:;" readonly><span class="btn_gTxt">BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								     <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_graynew s" href="javascript:;" disabled><span class="btn_gTxt">BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+							</tr>
+							<tr>
+								<td class="ta_c" style="height:60px">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_white s" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        <a class="btn_white s" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        <a class="btn_white s" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_white s" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_white s" href="javascript:;" style="border:1px solid #666;"><span class="btn_gTxt">BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_white s" href="javascript:;" readonly><span class="btn_gTxt">BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								     <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_white s" href="javascript:;" disabled><span class="btn_gTxt">BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+							</tr>
+							<tr>
+								<td class="ta_c" style="height:60px">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_white s" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        <a class="btn_white s" href="javascript:;"><span class="btn_gTxt">BTN</span></a>
+					                        <a href="javascript:;" class="btn_white s"><span class="btn_gTxt"><i class="icon-uniE609"></i>BTN</span></a>
+					                        </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a href="javascript:;" class="btn_white s"><span class="btn_gTxt"><i class="icon-uniE609"></i>BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a href="javascript:;" class="btn_white s" style="border:1px solid #666;"><span class="btn_gTxt"><i class="icon-uniE609"></i>BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a href="javascript:;" class="btn_white s" readonly><span class="btn_gTxt"><i class="icon-uniE609"></i>BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a href="javascript:;" class="btn_white s" disabled><span class="btn_gTxt"><i class="icon-uniE609"></i>BTN</span></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // 테이블 -->
+
+
+
+			</li>
+
+		</ul>
+		<!-- Inner Icon 버튼 -->
+		<ul class="hbox type2 type2">
+		    <li>
+				<div class="view_div">
+					<a class="btn_white s" href="javascript:;"><span class="btn_gTxt"><i class="icon-uni29"></i>Member</span></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+
+		</ul>
+	</div>
+	<!--// Inner Button -->
+
+	<!-- Icon Button -->
+	<div class="area_box">
+		<h1>Icon Button</h1>
+        <p class="txt-sub">
+        · Table, List 등 Contents 내부에서 사용되는 버튼<br>
+        · Icon 버튼의 경우, 의미를 직관적으로 이해할 수 있는 형태로 구성하며 Mouse Over시 Tooltip으로 버튼 정보를 제공해야한다.
+        </p>
+		<ul class="hbox">
+			<li>
+
+			<!-- 테이블 -->
+			<div class="sub_tableWrap">
+				<div class="tableWrap">
+					<table>
+						<colgroup>
+							<col width="auto">
+							<col width="15%">
+							<col width="15%">
+							<col width="15%">
+							<col width="15%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>e.g.</th>
+								<th>normal</th>
+								<th>hover/focused</th>
+								<th>readonly</th>
+								<th>disabled</th>
+							</tr>
+						</thead>
+						<tbody>
+						    <tr>
+								<td class="ta_c" style="height:60px">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+
+					                            <a class="btn_comm" href="javascript:;" alt="user" title="user"><i class="fa fa-search"></i></a>
+					                            <a class="btn_comm" href="javascript:;" alt="user" title="user"><i class="fa fa-user-o"></i></a>
+					                            <a class="btn_comm" href="javascript:;" alt="user" title="user"><i class="fa fa-user"></i></a>
+					                            <a class="btn_comm" href="javascript:;" alt="edit" title="edit"><i class="fa fa-pencil"></i></a>
+					                            <a class="btn_comm" href="javascript:;" alt="delete" title="delete"><i class="fa fa-trash"></i></a>
+					                            <a class="btn_comm" href="javascript:;" alt="calendar" title="calendar"><i class="fa fa-calendar"></i></a>
+				                            </div>
+				                            <textarea cols="30" rows="10" class="source_txt" readonly>
+				                            </textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="user" title="user"><i class="fa fa-user"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="user" title="user" style="border:1px solid #888;background :#f5f5f5;"><i class="fa fa-user"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="user" title="user" readonly ><i class="fa fa-user"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								     <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="user" title="user" disabled><i class="fa fa-user"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+							</tr>
+							<tr>
+								<td class="ta_c" style="height:60px">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+					                            <dd class="dtype_block">
+									<div class="sub_txtBt sub_dsel" style="width:50%">
+											<input class="sub_dsel_in" id="ip_user" style="width: calc(100% - 24px);" onkeypress="" type="text">
+											<a class="btn_comm" href="javascript:;" alt="user" title="user"><i class="fa fa-user-o"></i></a>
+											<ul id="" style="top: 24px; width: 100%; overflow: hidden; display:none; z-index: 3;">
+											<li>검색결과가 없습니다.</li>
+                                            </ul>
+								    </div>
+								</dd>
+				                            </div>
+				                            <textarea cols="30" rows="10" class="source_txt" readonly>
+				                            </textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="user" title="user"><i class="fa fa-user-o"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="user" title="user" style="border:1px solid #888;background :#f5f5f5;"><i class="fa fa-user-o"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="user" title="user" readonly><i class="fa fa-user-o"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								     <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="user" title="user" disabled><i class="fa fa-user-o"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+							</tr>
+							<tr>
+								<td class="ta_c" style="height:60px">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+					                            <div class="sub_txtBt mb10" style="width:60%">
+								                    <input class="input_cal" style="width: calc(100% - 34px);" type="text" value="">
+							                        <a class="btn_comm" href="javascript:;" alt="search"><i class="fa fa-search"></i></a>
+							                    </div>
+				                            </div>
+				                            <textarea cols="30" rows="10" class="source_txt" readonly>
+				                            </textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="search" title="search"><i class="fa fa-search"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="search" title="search" style="border:1px solid #888;background :#f5f5f5;"><i class="fa fa-search"></i></a>
+
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="search" title="search" readonly><i class="fa fa-search"></i></a>
+
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								     <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="search" title="search" disabled><i class="fa fa-search"></i></a>
+
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+							</tr>
+							<tr>
+								<td class="ta_c" style="height:60px">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+					                            <div class="sub_txtBt mb10" style="width:60%">
+								                    <input class="input_cal" style="width: calc(100% - 34px);" type="text" value="2019-04-01">
+							                        <a class="btn_comm" href="javascript:;" alt="calendar"><i class="fa fa-calendar"></i></a>
+							                    </div>
+				                            </div>
+				                            <textarea cols="30" rows="10" class="source_txt" readonly>
+				                            </textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="calendar" title="calendar"><i class="fa fa-calendar"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="calendar" title="calendar" style="border:1px solid #888;background :#f5f5f5;"><i class="fa fa-calendar"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="calendar" title="calendar" readonly><i class="fa fa-calendar"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								     <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="calendar" title="calendar" disabled><i class="fa fa-calendar"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+							</tr>
+							<tr>
+								<td class="ta_c" style="height:60px">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+					                            <div class="sub_txtBt mb10" style="width:60%">
+							                        <input class="input_cal" style="width: calc(50% - 34px);" type="text" value="2019-04-01">
+							                        <a class="btn_comm" href="javascript:;" alt="calendar"><i class="fa fa-calendar"></i></a>
+							                        <span class="gap_txt">~</span>
+							                        <input class="input_cal" style="width: calc(50% - 35px);" type="text" value="2019-04-02">
+							                        <a class="btn_comm" href="javascript:;" alt="calendar"><i class="fa fa-calendar"></i></a>
+					                           </div>
+				                            </div>
+				                            <textarea cols="30" rows="10" class="source_txt">
+				                            </textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="calendar"><i class="fa fa-calendar"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="calendar" style="border:1px solid #888;background :#f5f5f5;"><i class="fa fa-calendar"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								    <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="calendar" readonly><i class="fa fa-calendar"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+								<td class="ta_c">
+								     <ul class="hbox">
+								        <li>
+								            <div class="view_div">
+								            <a class="btn_comm" href="javascript:;" alt="calendar" disabled><i class="fa fa-calendar"></i></a>
+								            </div>
+								            <textarea cols="30" rows="10" class="source_txt" readonly></textarea>
+			                	        </li>
+			                	    </ul>
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // 테이블 -->
+			</li>
+
+		</ul>
+		<ul class="hbox type2 type2">
+		    <li>
+				<div class="view_div">
+					<a class="btn_comm" href="javascript:;" alt="user" title="user"><i class="fa fa-search"></i></a>
+				</div>
+				<textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+
+			<li>
+				<div class="view_div">
+					<a class="btn_comm" href="javascript:;" alt="user" title="user"><i class="fa fa-user"></i></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_comm" href="javascript:;" alt="edit" title="edit"><i class="fa fa-pencil"></i></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_comm" href="javascript:;" alt="delete" title="delete"><i class="fa fa-trash"></i></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_comm" href="javascript:;" alt="calendar" title="calendar"><i class="fa fa-calendar"></i></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_comm" href="javascript:;" alt="download" title="download"><i class="fa fa-arrow-circle-o-down"></i></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_comm" href="javascript:;" alt="add" title="add"><i class="fa fa-plus"></i></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_comm" href="javascript:;" alt="delete" title="delete"><i class="fa fa-minus"></i></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_comm" href="javascript:;" alt="calculate" title="calculate"><i class="fa fa-calculator"></i></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_comm" href="javascript:;" alt="excel" title="excel"><i class="fa fa-file-excel-o"></i></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_comm" href="javascript:;" alt="check" title="check"><i class="fa fa-check-square-o "></i></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_comm" href="javascript:;" alt="refresh" title="refresh"><i class="fa fa-refresh  "></i></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a title="edit" class="btn_blue3" href="javascript:;" alt="edit"><i class="fa fa-pencil"></i></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a title="file" class="btn_blue3" href="javascript:;" alt="file"><i class="fa fa-file-text-o"></i></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a title="clip" class="btn_blue3" href="javascript:;" alt="clip"><i class="fa fa-paperclip"></i></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue3 file_blue" href="javascript:;"></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue3 people_blue" href="javascript:fnCsvDownload('product');"></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a class="btn_blue3 csv_blue" href="javascript:fnCsvDownload('product');"></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a title="detailView" class="btn_blue3 detailView" href="javascript:;" alt="detailView"></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+			<li>
+				<div class="view_div">
+					<a title="detailView" class="btn_blue3 detailView02" href="javascript:;" alt="detailView"></a>
+				</div>
+			    <textarea cols="30" rows="10" class="source_txt" readonly>
+				</textarea>
+			</li>
+
+		</ul>
+	</div>
+	<!--// Icon Button -->
+
+
+
+
+	<!-- 버튼 스타일8 -->
+	<div class="area_box">
+		<h1>버튼 스타일8</h1>
+		<ul class="hbox type2 type2">
+			<li>
+				<div>
+					<a class="btn_gray2" href="javascript:;">Read All +</a>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<a class="btn_gray2 disabled" href="javascript:;">Read All +</a>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<a class="btn_cancelY" href="javascript:;">Cancel</a>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<a class="btn_cir" href="javascript:;">
+						<span class="txt">Get Mol<br />File</span>
+						<span class="icon_arrR"></span>
+					</a>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<span class="btn_x p">+</span>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<span class="btn_x m">-</span>
+				</div>
+
+			</li>
+		</ul>
+	</div>
+	<!-- 버튼 스타일9 -->
+	<div class="area_box">
+		<h1>버튼 스타일9</h1>
+		<ul class="hbox type2">
+			<li style="width:300px">
+				<div class="view_div bcb">
+					<a class="btn_rec_wa" href="javascript:;">View Deatails <span class="icon_arr right"></span></a>
+				</div>
+
+			</li>
+			<li>
+				<div class="view_div bcb">
+					<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+				</div>
+
+			</li>
+		</ul>
+	</div>
+	<!-- 아이콘 -->
+	<div class="area_box">
+		<h1>아이콘</h1>
+		<ul class="hbox type2">
+			<li>
+				<div>
+					<span class="btn_rec_ra">New</span>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<span class="btn_rec_ra y">New</span>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<span class="icon_circle">UP</span>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<span class="person_tooltip">
+						<div class="pt_wrap">
+							<div class="pt_wrapCon">
+								<h4>해석담당자</h4>
+								<p>홍길동 연구원(CAE팀)<br>+82-31-8000-9876</p>
+							</div>
+							<a class="pt_btn" href="javascript:;">Manual.pdf</a>
+						</div>
+					</span>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<span class="count">1</span>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<span class="icon_circle s r"></span>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<span class="icon_circle s g"></span>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<span class="icon_circle s g2"></span>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<span class="icon_circle s b"></span>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<span class="icon_circle s y"></span>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<span class="icon_circle s bg"></span>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<span class="icon_circle s bb"></span>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<span class="icon_circle s r2"></span>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<span class="icon_circle s p"></span>
+				</div>
+
+			</li>
+			<li>
+				<div>
+					<span class="icon_circle s gray"></span>
+				</div>
+
+			</li>
+		</ul>
+	</div>
+
+	<!-- 조건검색 1 -->
+	<div class="area_box">
+		<h1>조건검색 1</h1>
+		<div class="view_div t">
+			<!-- 조건검색 -->
+			<div class="sub_selBox mt30">
+				<div class="sub_sbLayerBox">
+					<ul class="sub_sblb_wrap box5">
+						<!-- box1 -->
+						<li>
+							<dl class="sub_dtdd">
+								<dt class="dtype_block">
+									User
+								</dt>
+								<dd class="dtype_block">
+									<div class="sub_txtBt">
+										<input type="text" style="width:calc(100% - 24px);">
+										<input type="button" class="icon_person">
+									</div>
+								</dd>
+							</dl>
+						</li>
+						<!-- box2 -->
+						<li>
+							<dl class="sub_dtdd">
+								<dt class="dtype_block">
+									Job ID
+								</dt>
+								<dd class="dtype_block">
+									<input type="text" style="width:100%;">
+								</dd>
+							</dl>
+						</li>
+						<!-- box3 -->
+						<li>
+							<dl class="sub_dtdd">
+								<dt class="dtype_block">
+									Job Code
+								</dt>
+								<dd class="dtype_block">
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<input type="text" class="sub_dsel_in" style="width:100%" />
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</dd>
+							</dl>
+						</li>
+						<!-- box4 -->
+						<li>
+							<dl class="sub_dtdd">
+								<dt class="dtype_block">
+									Job Name
+								</dt>
+								<dd class="dtype_block">
+									<input type="text" style="width:100%;">
+								</dd>
+							</dl>
+						</li>
+						<!-- box5 -->
+						<li>
+							<dl class="sub_dtdd">
+								<dt class="dtype_block">
+									Job Status
+								</dt>
+								<dd class="dtype_block">
+									<div class="sub_dsel" onClick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											All
+										</div>
+										<ul>
+											<li onClick = "dsel_liClick(this)">True</li>
+											<li onClick = "dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</dd>
+							</dl>
+						</li>
+					</ul>
+					<div class="sub_sblb_fold mt10">
+						<ul class="sub_sblb_wrap box5">
+							<!-- box1 -->
+							<li style="width:250px; margin-left:0;">
+								<dl class="sub_dtdd">
+									<dt class="dtype_block">
+										Reques Date
+									</dt>
+									<dd class="dtype_block">
+										<div class="sub_txtBt">
+											<input type="text" class="input_cal" style="width:calc(50% - 34px);" value="2019-04-01" disabled>
+											<input type="button" class="icon_cal" disabled>
+											<span class="gap_txt">~</span>
+											<input type="text" class="input_cal" style="width:calc(50% - 35px);" value="2019-04-02" disabled>
+											<input type="button" class="icon_cal" disabled>
+										</div>
+									</dd>
+								</dl>
+							</li>
+							<!-- box2 -->
+							<li>
+								<dl class="sub_dtdd">
+									<dt class="dtype_block">
+										Start Date
+									</dt>
+									<dd class="dtype_block">
+										<div class="sub_txtBt">
+											<input type="text" class="input_cal" style="width:calc(50% - 34px);" value="2019-04-01">
+											<input type="button" class="icon_cal">
+											<span class="gap_txt">~</span>
+											<input type="text" class="input_cal" style="width:calc(50% - 35px);" value="2019-04-02">
+											<input type="button" class="icon_cal">
+										</div>
+									</dd>
+								</dl>
+							</li>
+							<!-- box3 -->
+							<li>
+								<dl class="sub_dtdd">
+									<dt class="dtype_block">
+										End Date
+									</dt>
+									<dd class="dtype_block">
+										<div class="sub_txtBt">
+											<input type="text" class="input_cal" style="width:calc(50% - 34px);" value="2019-04-01">
+											<input type="button" class="icon_cal">
+											<span class="gap_txt">~</span>
+											<input type="text" class="input_cal" style="width:calc(50% - 35px);" value="2019-04-02">
+											<input type="button" class="icon_cal">
+										</div>
+									</dd>
+								</dl>
+							</li>
+							<!-- box4 -->
+							<li>
+								<dl class="sub_dtdd">
+									<dt class="dtype_block">
+										Job Status
+									</dt>
+									<dd class="dtype_block">
+										<div class="sub_dsel" onClick="dsel_over(this)">
+											<div class="sub_dsel_in">
+												All
+											</div>
+											<ul>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+												<li onClick = "dsel_liClick(this)">True</li>
+												<li onClick = "dsel_liClick(this)">False</li>
+											</ul>
+										</div>
+									</dd>
+								</dl>
+							</li>
+							<!-- box5 -->
+							<li></li>
+						</ul>
+					</div>
+					<div class="sub_sblb_both">
+						<div class="sub_sblb_both_l pt5">
+							<div class="swtype">
+								<input type="checkbox" id="sw1" checked onChange="fn_foldSearch(this)">
+								<label for="sw1" data-txt="검색조건 닫기">검색조건 열기</label>
+							</div>
+						</div>
+						<div class="sub_sblb_both_r">
+							<a href="javascript:;" class="btn_gray s disabled">
+								<span class="btn_gIcon check"></span>
+								<span class="btn_gTxt">Save</span>
+							</a>
+							<a href="javascript:;" class="btn_gray s disabled">
+								<span class="btn_gIcon search"></span>
+								<span class="btn_gTxt">Search</span>
+							</a>
+							<a href="javascript:;" class="btn_gray s disabled">
+								<span class="btn_gIcon minus"></span>
+								<span class="btn_gTxt">Clear</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- // 조건검색 -->
+		</div>
+
+	</div>
+	<!-- 조건검색 2 -->
+	<div class="area_box">
+		<h1>조건검색 2</h1>
+		<div class="view_div t">
+			<div class="sub_selBox">
+				<div class="sub_sbLayerBox">
+					<ul class="sub_sblb_wrap box">
+						<!-- box1 -->
+						<li class="pr20">
+							<dl class="sub_dtdd">
+								<dt style="width: 115px;">
+									해석 종류 선택
+								</dt>
+								<dd style="width: calc(100% - 115px);">
+									<div class="sub_dsel" onclick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											선택하세요
+										</div>
+										<ul>
+											<li onclick="dsel_liClick(this)"><label onclick="dsel_inputClick(this)"><input type="checkbox">집에가고 싶다</label></li>
+											<li onclick="dsel_liClick(this)"><label onclick="dsel_inputClick(this)"><input type="checkbox">정말로 가고 싶다</label></li>
+											<li onclick="dsel_liClick(this)"><label onclick="dsel_inputClick(this)"><input type="checkbox">배고파</label></li>
+											<li onclick="dsel_liClick(this)"><label onclick="dsel_inputClick(this)"><input type="checkbox">치킨먹고 싶다</label></li>
+											<li onclick="dsel_liClick(this)"><label onclick="dsel_inputClick(this)"><input type="checkbox">고기 먹고 싶다</label></li>
+											<!--
+											<li onClick = "dsel_liClick(this)">11</li>
+											<li onClick = "dsel_liClick(this)">22</li>
+											<li onClick = "dsel_liClick(this)">33</li>
+											<li onClick = "dsel_liClick(this)">44</li>
+											-->
+										</ul>
+									</div>
+								</dd>
+							</dl>
+						</li>
+						<!-- box2 -->
+						<li class="pl10 pr10 ">
+							<dl class="sub_dtdd">
+								<dt style="width: 115px;">
+									Job Name 입력
+								</dt>
+								<dd style="width: calc(100% - 115px);">
+									<input style="width: 100%;" type="text">
+								</dd>
+							</dl>
+						</li>
+						<!-- box3 -->
+						<li class="pl20">
+							<dl class="sub_dtdd">
+								<dt style="width: 115px;">
+									자동 첨부된 파일
+								</dt>
+								<dd style="width: calc(100% - 115px);">
+									<input style="width: 100%;" type="text">
+								</dd>
+							</dl>
+						</li>
+					</ul>
+					<ul class="sub_sblb_wrap box">
+						<!-- box1 -->
+						<li class="pr20">
+							<dl class="sub_dtdd">
+								<dt style="width: 115px;">
+									Input File Upload
+								</dt>
+								<dd style="width: calc(100% - 115px);">
+									<div class="sub_dFile">
+										<input disabled="" type="text" value="File Input(Tiny)">
+										<input onclick="fn_fileClick(this)" type="button" value="Choose File">
+										<input onchange="fn_fileChange(this)" type="file">
+									</div>
+								</dd>
+							</dl>
+						</li>
+						<!-- box2 -->
+						<li class="pl10 pr10"></li>
+						<!-- box3 -->
+						<li class="pl20 ta_r">
+							<a class="btn_gray s" href="javascript:;">
+								<span class="btn_gTxt">Run Simulation</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- 조건검색 3 -->
+	<div class="area_box">
+		<h1>조건검색 3</h1>
+		<div class="view_div t">
+			<!-- 검색조건 -->
+			<div class="sub_requirehBox">
+				<div class="sub_rqSelBox">
+					<div class="sub_dsel" onclick="dsel_over(this)">
+						<div class="sub_dsel_in">
+							All
+						</div>
+						<ul>
+							<li onclick="dsel_liClick(this)">All</li>
+							<li onclick="dsel_liClick(this)">회로</li>
+							<li onclick="dsel_liClick(this)">재료</li>
+							<li onclick="dsel_liClick(this)">공정구동</li>
+							<li onclick="dsel_liClick(this)">기구</li>
+							<li onclick="dsel_liClick(this)">패널</li>
+							<li onclick="dsel_liClick(this)">기타</li>
+						</ul>
+					</div>
+
+					<div class="sub_dsel" onclick="dsel_over(this)">
+						<div class="sub_dsel_in">
+							All
+						</div>
+						<ul>
+							<li onclick="dsel_liClick(this)">All</li>
+							<li onclick="dsel_liClick(this)">카테고리순</li>
+							<li onclick="dsel_liClick(this)">신규순</li>
+						</ul>
+					</div>
+
+					<div class="sub_dsel" onclick="dsel_over(this)">
+						<div class="sub_dsel_in">
+							Sorts by
+						</div>
+						<ul>
+							<li onclick="dsel_liClick(this)">Sorts by</li>
+						</ul>
+					</div>
+				</div>
+				<div class="sub_rqInBox">
+					<div class="sub_txtBt">
+						<input style="width: calc(100% - 25px);" type="text">
+						<a class="btn_rec searchBasic" href="javascript:;"></a>
+					</div>
+				</div>
+			</div>
+			<!-- // 검색조건 -->
+		</div>
+
+	</div>
+
+	<!-- 테이블2 -->
+	<div class="area_box">
+		<h1>테이블2</h1>
+		<div class="view_div t">
+			<!-- 테이블 top -->
+			<div class="sub_tableTopBox mt10">
+				<div class="sub_tableTopBox_l">
+					<span class="pr5">Show </span>
+					<!-- 셀렉트 -->
+					<div class="sub_dsel" onClick="dsel_over(this)" style="width:60px;">
+						<div class="sub_dsel_in">
+							선택
+						</div>
+						<ul>
+							<li onClick = "dsel_liClick(this)">1</li>
+							<li onClick = "dsel_liClick(this)">2</li>
+							<li onClick = "dsel_liClick(this)">3</li>
+							<li onClick = "dsel_liClick(this)">4</li>
+							<li onClick = "dsel_liClick(this)">5</li>
+							<li onClick = "dsel_liClick(this)">6</li>
+							<li onClick = "dsel_liClick(this)">7</li>
+							<li onClick = "dsel_liClick(this)">8</li>
+							<li onClick = "dsel_liClick(this)">9</li>
+							<li onClick = "dsel_liClick(this)">10</li>
+						</ul>
+					</div>
+					<!-- //셀렉트 -->
+					<span class="pl5">Rows</span>
+					<span class="pc_r1 fw_b pl10">[1 to 9 / Total : 300]</span>
+					<span class="pc_r1">2018-03-12 08:40:01</span>
+				</div>
+				<div class="sub_tableTopBox_r">
+					<a href="javascript:;" class="btn_gray">
+						<span class="btn_gTxt">첨부파일 다운로드</span>
+					</a>
+					<a href="javascript:;" class="btn_gray">
+						<span class="btn_gTxt">결재요청</span>
+					</a>
+					<a href="javascript:;" class="btn_gray">
+						<span class="btn_gIcon del"></span>
+						<span class="btn_gTxt">Delate</span>
+					</a>
+				</div>
+			</div>
+			<!-- //테이블 top -->
+			<!-- 테이블 -->
+			<div class="sub_tableWrap type02 mt10">
+				<div class="tableWrap">
+					<table>
+						<colgroup>
+							<col width="63px" />
+							<col width="86px" />
+							<col width="auto" />
+							<col width="140px" />
+							<col width="140px" />
+							<col width="140px" />
+							<col width="140px" />
+							<col width="200px" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th><input type="checkbox"></th>
+								<th>User</th>
+								<th>Job ID</th>
+								<th>Job Code</th>
+								<th>Job Name</th>
+								<th>State A</th>
+								<th>Job Cancel</th>
+								<th>Request Date</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+								<th>Report</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s g"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center"><a href="javascript:;" class="btn_rec search"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s g"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center"><a href="javascript:;" class="btn_rec disabled search"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s b"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center"><a href="javascript:;" class="btn_rec pen"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s b"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center"><a href="javascript:;" class="btn_rec disabled pen"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s r"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center"><a href="javascript:;" class="btn_rec pen"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td align="center">ks109.choi</td>
+								<td align="center">kc109.choi_2019312155534903</td>
+								<td align="center">Sim</td>
+								<td align="center">Split</td>
+								<td align="center"><span class="icon_circle s y"></span></td>
+								<td align="center"><a href="javascript:;" class="btn_cancelY">Cancel</a></td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center">2019-04-18 15:56:55</td>
+								<td align="center"></td>
+								<td align="center"><a href="javascript:;" class="btn_rec pen"></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // 테이블 -->
+		</div>
+
+	</div>
+	<!-- 테이블3 -->
+	<div class="area_box">
+		<h1>테이블3</h1>
+		<div class="view_div t">
+			<!-- 테이블 -->
+			<div class="sub_tableWrap type03">
+				<div class="tableWrap">
+					<table>
+						<colgroup>
+							<col width="40px" />
+							<col width="auto" />
+							<col width="200px" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th><input type="checkbox"></th>
+								<th>제목</th>
+								<th>다운로드</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td class="pl10">L7-2 75 4K 선행 제품 Pixel RGB OPC Sim 의뢰</td>
+								<td align="center"><a class="btn_rec down disabled" href="javascript:;"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td class="pl10">L7-2 75 4K 선행 제품 Pixel RGB OPC Sim 의뢰</td>
+								<td align="center"><a class="btn_rec down" href="javascript:;"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td class="pl10">L7-2 75 4K 선행 제품 Pixel RGB OPC Sim 의뢰</td>
+								<td align="center"><a class="btn_rec down" href="javascript:;"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td class="pl10">L7-2 75 4K 선행 제품 Pixel RGB OPC Sim 의뢰</td>
+								<td align="center"><a class="btn_rec down" href="javascript:;"></a></td>
+							</tr>
+							<tr>
+								<td align="center"><input type="checkbox"></td>
+								<td class="pl10">L7-2 75 4K 선행 제품 Pixel RGB OPC Sim 의뢰</td>
+								<td align="center"><a class="btn_rec down" href="javascript:;"></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // 테이블 -->
+		</div>
+
+	</div>
+
+
+	<!-- 테이블7 -->
+	<div class="area_box">
+		<h1>테이블 7</h1>
+		<div class="view_div t">
+			<!-- table -->
+			<div class="sub_tableWrap typePop2">
+				<div class="tableWrap">
+					<table>
+						<colgroup>
+							<col width="90px">
+							<col width="200px">
+							<col width="90px">
+							<col width="200px">
+							<col width="90px">
+							<col width="200px">
+							<col width="90px">
+							<col width="auto">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th align="center">제목</th>
+								<td colspan="7" class=""><input style="width:100%;" type="text"></td>
+							</tr>
+							<tr style="height:20px;">
+								<td colspan="8"></td>
+							</tr>
+							<tr>
+								<th align="center">요청자</th>
+								<td><input type="text" value="홍길동 Staff Engineer" style="width:calc(100% - 20px);" disabled /></td>
+								<th align="center">요청부서(팀)</th>
+								<td><input type="text" value="삼성디스플레이(CAE팀)" style="width:calc(100% - 20px);" disabled /></td>
+								<th align="center">요청부서(실)</th>
+								<td><input type="text" value="삼성디스플레이(제2연구실)" style="width:100% - 20px);" disabled /></td>
+								<th align="center">요청부서PL</th>
+								<td>
+									<div class="sub_txtBt" style="width:100%" >
+										<input style="width: calc(100% - 24px);" type="text" onFocus="javascript:$(this).parent().width('100%');">
+										<input class="icon_person" type="button">
+									</div>
+								</td>
+							</tr>
+							<tr style="height:20px;">
+								<td colspan="8"></td>
+							</tr>
+							<tr>
+								<th align="center">요청부서장</th>
+								<td>
+									<div class="sub_txtBt" style="width:calc(100% - 20px);">
+										<input style="width: calc(100% - 24px);" type="text">
+										<input class="icon_person" type="button">
+									</div>
+								</td>
+								<th align="center">요청부서Site</th>
+								<td>
+									<div class="sub_dsel" onclick="dsel_over(this)" style="width:calc(100% - 20px);">
+										<div class="sub_dsel_in">
+											All
+										</div>
+										<ul>
+											<li onclick="dsel_liClick(this)">True</li>
+											<li onclick="dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<th align="center">업무파트</th>
+								<td>
+									<div class="sub_dsel" onclick="dsel_over(this)" style="width:calc(100% - 20px);">
+										<div class="sub_dsel_in">
+											All
+										</div>
+										<ul>
+											<li onclick="dsel_liClick(this)">True</li>
+											<li onclick="dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+								<th align="center">해석분야(Info)</th>
+								<td>
+									<div class="sub_dsel" onclick="dsel_over(this)">
+										<div class="sub_dsel_in">
+											All
+										</div>
+										<ul>
+											<li onclick="dsel_liClick(this)">True</li>
+											<li onclick="dsel_liClick(this)">False</li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+							<tr style="height:20px;">
+								<td colspan="8"></td>
+							</tr>
+							<tr>
+								<th align="center">요청완료일</th>
+								<td>
+									<div class="fs_0" style="width:calc(100% - 20px)">
+										<input disabled="" class="input_cal" style="width: calc(100% - 24px);" type="text" value="2019-04-01">
+										<input class="icon_cal" type="button">
+									</div>
+								</td>
+								<th align="center">제품군</th>
+								<td colspan="5">
+									<div class="fs_0">
+										<div class="sub_dsel" onclick="dsel_over(this)" style="width:184px;">
+											<div class="sub_dsel_in">
+												All
+											</div>
+											<ul>
+												<li onclick="dsel_liClick(this)">True</li>
+												<li onclick="dsel_liClick(this)">False</li>
+											</ul>
+										</div>
+										<div class="sub_dsel ml20" onclick="dsel_over(this)" style="width:100px;">
+											<div class="sub_dsel_in">
+												All
+											</div>
+											<ul>
+												<li onclick="dsel_liClick(this)">True</li>
+												<li onclick="dsel_liClick(this)">False</li>
+											</ul>
+										</div>
+										<div class="sub_dsel ml10" onclick="dsel_over(this)" style="width:170px;">
+											<div class="sub_dsel_in">
+												All
+											</div>
+											<ul>
+												<li onclick="dsel_liClick(this)">True</li>
+												<li onclick="dsel_liClick(this)">False</li>
+											</ul>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr style="height:20px;">
+								<td colspan="8"></td>
+							</tr>
+							<tr>
+								<th align="center" valign="middle">결재정보 및<br />첨부파일</th>
+								<td colspan="7">
+									<div class="sub_halfBox">
+										<ul>
+											<li>
+												<div class="ta_r">
+													<a href="javascript:;" class="btn_purple">결재작성</a>
+												</div>
+												<div class="sub_listBox mt10">
+													<div class="sub_lboxTop">[기안] 홍길동 과장 / CAE팀(디스플레이) / 삼성디스플레이</div>
+													<ul>
+														<li data-id="01-2">
+															<div class="sub_lbConBox">
+																<div class="sRecWrap">
+																	<input type="radio" id="r01-1" name="r01" class="btn_sRec" />
+																	<label for="r01-1">결재</label>
+																</div>
+																<div class="sRecWrap">
+																	<input type="radio" id="r01-2" name="r01" class="btn_sRec" />
+																	<label for="r01-2">합의</label>
+																</div>
+																<div class="sRecWrap">
+																	<input type="radio" id="r01-3" name="r01" class="btn_sRec" />
+																	<label for="r01-3">결재</label>
+																</div>
+															</div>
+															<p>홍길동5 Engineer / CAE팀(디스플레이) / 삼성디스플레이</p>
+															<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+														</li>
+														<li data-id="02-2">
+															<div class="sub_lbConBox">
+																<div class="sRecWrap">
+																	<input type="radio" id="r02-1" name="r02" class="btn_sRec" />
+																	<label for="r02-1">결재</label>
+																</div>
+																<div class="sRecWrap">
+																	<input type="radio" id="r02-2" name="r02" class="btn_sRec" />
+																	<label for="r02-2">합의</label>
+																</div>
+																<div class="sRecWrap">
+																	<input type="radio" id="r02-3" name="r02" class="btn_sRec" />
+																	<label for="r02-3">결재</label>
+																</div>
+															</div>
+															<p>홍길동5 Engineer / CAE팀(디스플레이) / 삼성디스플레이</p>
+															<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+														</li>
+														<li data-id="03-2">
+															<div class="sub_lbConBox">
+																<div class="sRecWrap">
+																	<input type="radio" id="r03-1" name="r03" class="btn_sRec" />
+																	<label for="r03-1">결재</label>
+																</div>
+																<div class="sRecWrap">
+																	<input type="radio" id="r03-2" name="r03" class="btn_sRec" />
+																	<label for="r03-2">합의</label>
+																</div>
+																<div class="sRecWrap">
+																	<input type="radio" id="r03-3" name="r03" class="btn_sRec" />
+																	<label for="r03-3">결재</label>
+																</div>
+															</div>
+															<p>홍길동5 Engineer / CAE팀(디스플레이) / 삼성디스플레이</p>
+															<a href="javascript:;" class="sub_lbConClise" onClick="fn_clickRemoveLi(this)"></a>
+														</li>
+													</ul>
+												</div>
+											</li>
+											<li>
+												<div class="sub_fileListBoxBt">
+													<a href="javascript:;" class="btn_purple" onClick="fn_fileClick2(this)">첨부파일추가</a>
+													<a href="javascript:;" class="btn_purple" onClick="fn_fileAllremove(this)">전체삭제</a>
+													<input onchange="fn_fileChange2(this)" type="file">
+												</div>
+												<div class="sub_fileListBox mt10">
+													<ul>
+													</ul>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</td>
+							</tr>
+							<tr style="height:20px;">
+								<td colspan="8"></td>
+							</tr>
+							<tr style="height:240px;">
+								<th align="center" valign="middle">요청내용</th>
+								<td colspan="7" class="d_td">
+									<textarea cols="30" rows="10" style="height:240px;" disabled>
+										■ 과제 목표
+										■ 요청 내용
+										■ 추진일정
+									</textarea>
+									<!-- div style="height:240px; font-size:18px; color:#ccc; line-height:240px; text-align:center; border:1px solid #ddd; background:#fbfbfb;">에디터 영역</div-->
+								</td>
+							</tr>
+							<tr style="height:20px;">
+								<td colspan="8"></td>
+							</tr>
+							<tr style="height:110px;">
+								<th align="center" valign="middle">기대효과</th>
+								<td colspan="7">
+									<table style="width:100%">
+										<colgroup>
+											<col width="33%" />
+											<col width="auto" />
+											<col width="33%" />
+										</colgroup>
+										<tbody>
+											<tr>
+												<td class="pr5">
+													<div class="input_number">
+														<dl>
+															<dt>Cost</dt>
+															<dd>
+																<input type="text" onKeydown="fn_numberformat(this)" onKeyup="fn_numberformat(this)" maxlength="7">
+																<span>백만원</span>
+															</dd>
+														</dl>
+													</div>
+													<textarea cols="30" rows="10" class="mt10" style="display:block; width:100%; height:90px;"></textarea>
+												</td>
+												<td class="pl5 pr5">
+													<div class="input_number">
+														<dl>
+															<dt>Cost</dt>
+															<dd>
+																<input type="text" onKeydown="fn_numberformat(this)" onKeyup="fn_numberformat(this)" maxlength="7">
+																<span>백만원</span>
+															</dd>
+														</dl>
+													</div>
+													<textarea cols="30" rows="10" class="mt10" style="display:block; width:100%; height:90px;"></textarea>
+												</td>
+												<td class="pl5">
+													<div class="input_number">
+														<dl>
+															<dt>Cost</dt>
+															<dd>
+																<input type="text" onKeydown="fn_numberformat(this)" onKeyup="fn_numberformat(this)" maxlength="7">
+																<span>백만원</span>
+															</dd>
+														</dl>
+													</div>
+													<textarea cols="30" rows="10" class="mt10" style="display:block; width:100%; height:90px;"></textarea>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- // table -->
+		</div>
+
+	</div>
+
+	<!-- 리스트형 -->
+	<div class="area_box">
+		<h1>리스트형</h1>
+		<div class="view_div t">
+			<div class="sub_txtBt sub_dsel">
+				<input class="sub_dsel_in" style="width: calc(100% - 24px);" type="text">
+				<input class="icon_person" type="button" onClick="dsel_over(this)">
+				<ul>
+					<li onclick="dsel_liClick(this,true)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+					<li onclick="dsel_liClick(this,true)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+					<li onclick="dsel_liClick(this,true)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+					<li onclick="dsel_liClick(this,true)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+					<li onclick="dsel_liClick(this,true)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+					<li onclick="dsel_liClick(this,true)">홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이</li>
+				</ul>
+			</div>
+			<div class="sub_listBox mt10">
+				<div class="sub_lboxTop">[기안] 홍길동 과장 / CAE팀(디스플레이) / 삼성디스플레이</div>
+				<ul></ul>
+			</div>
+		</div>
+
+	</div>
+	<!-- 리스트형2 -->
+	<div class="area_box">
+		<h1>리스트형2</h1>
+		<div class="view_div t">
+			<div>
+				<div class="ta_r">
+					<a href="javascript:;" class="btn_purple">결재작성</a>
+				</div>
+				<div class="sub_listBox mt10">
+					<div class="sub_lboxTop">[기안] 홍길동 과장 / CAE팀(디스플레이) / 삼성디스플레이</div>
+					<ul>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sub_lbConBox">
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">합의</a>
+								<a class="btn_sRec" onclick="fn_checked(this)" href="javascript:;">결재</a>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+						<li>
+							<div class="sRecWrap">
+								<input type="radio" id="tr-1" name="tr-1" class="btn_sRec" /><label for="tr-1">결재</label>
+							</div>
+							<div class="sRecWrap">
+								<input type="radio" id="tr-2" name="tr-2" class="btn_sRec" /><label for="tr-2">합의</label>
+							</div>
+							<div class="sRecWrap">
+								<input type="radio" id="tr-3" name="tr-3" class="btn_sRec" /><label for="tr-3">결재</label>
+							</div>
+							<p>
+								홍길동 Engineer / CAE팀(디스플레이) / 삼성디스플레이
+							</p>
+							<a class="sub_lbConClise" onclick="fn_clickRemoveLi(this)" href="javascript:;"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- 파일 리스트 -->
+	<div class="area_box">
+		<h1>파일 리스트</h1>
+		<div class="view_div t">
+			<div>
+				<div class="sub_fileListBoxBt">
+					<a href="javascript:;" class="btn_purple" onClick="fn_fileClick2(this)">첨부파일추가</a>
+					<a href="javascript:;" class="btn_purple" onClick="fn_fileAllremove(this)">전체삭제</a>
+					<input onchange="fn_fileChange2(this)" type="file">
+				</div>
+				<div class="sub_fileListBox mt10">
+					<ul>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
