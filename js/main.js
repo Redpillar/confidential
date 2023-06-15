@@ -54,11 +54,33 @@ function gnbNoticeClose(){
     
 }
 
+function getCounting(el){
+    const _this = el;
+    const num = _this.getAttribute("num");
+    const delay = 10;
+    const totalTime = 800;
+    const one = totalTime / delay
+    const numOne = num / one;
+    let cuNum = 0;
+    if(_this.timer) clearInterval(_this.timer);
+    _this.timer = setInterval(()=>{
+        cuNum += numOne;
+        _this.innerText = String(Math.ceil(cuNum)).numberFormat();
+        if(cuNum >= num){
+            clearInterval(_this.timer);
+            _this.timer = null;
+            cuNum = num;
+            _this.innerText = String(cuNum).numberFormat();
+        }
+    },delay)
+}
 
 
 // init
 function init(){
+    const _count = document.querySelector("#mainCount");
     mainSlider();
+    getCounting(_count);
 }
 
 window.onload = function(){
