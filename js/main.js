@@ -75,7 +75,6 @@ function lnbMenuOpenFn(){
     const _this = event.currentTarget;
     const checked = _this.checked;
     const _bookmarkPop = document.querySelector("#bookmarkPop");
-    console.log("checked : ",checked)
     if(checked){
         _bookmarkPop.classList.add("open");
     }else{
@@ -157,14 +156,20 @@ function menuFoldingFn(){
 function bookmarkSettingFn(){
     const _this = event.currentTarget;
     const _menus = document.querySelectorAll(".lnbMenuListWrap li.active .lnbMenuList .menuParent");
+    const _menuWrap = document.querySelector(".lnbMenuListWrap li.active .lnbMenuList");
     const checked = _this.checked;
     _menus.forEach((item,i)=>{
         if(checked){
-            item.classList.add("bookmark");
+            // item.classList.add("bookmark");
         }else{
-            item.classList.remove("bookmark");
+            // item.classList.remove("bookmark");
         }
     })
+    if(checked){
+        _menuWrap.classList.add("bookmark");
+    }else{
+        _menuWrap.classList.remove("bookmark");
+    }
 }
 function checkingBookmark(){
     const _bookmark = document.querySelector("#bookmarkSet")
