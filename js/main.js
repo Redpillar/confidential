@@ -22,10 +22,6 @@ function mainSlider(){
         if(checked) variableNum = 100;
         const calc = currentPosition + variableNum;
         const apply = (calc > 0)?max:(calc < max)?0:calc;
-        console.log("checked : ",checked)
-        console.log("currentPosition : ",currentPosition)
-        console.log("calc : ",calc)
-        console.log("apply : ",apply)
         const num = (Math.abs(apply) * 0.01) + 1;
         const applyNum = (num > 9)?num:"0"+num;
         _slider.style.left = apply + "%";
@@ -75,12 +71,128 @@ function getCounting(el){
     },delay)
 }
 
+function lnbMenuOpenFn(){
+    const _this = event.currentTarget;
+    const checked = _this.checked;
+    const _bookmarkPop = document.querySelector("#bookmarkPop");
+    console.log("checked : ",checked)
+    if(checked){
+        _bookmarkPop.classList.add("open");
+    }else{
+        _bookmarkPop.classList.remove("open");
+    }
+
+}
+function menuChangedEv(){
+    const _this = event.currentTarget;
+    const _parent = _this.closest(".menuParent");
+    const checked = _parent.classList.contains("open");
+    if(checked){
+        _parent.classList.remove("open");
+    }else{
+        _parent.classList.add("open");
+    }
+    switchCheckbox();
+}
+function gnbMenuMouseover(){
+    const _this = event.currentTarget;
+    const name = _this.getAttribute("menuname");
+    const _name = document.querySelectorAll("[menuname="+name+"]");
+    const _gnb = document.querySelector("#gnb");
+    const _lnb = document.querySelector("#lnbMenuBox");
+    _name.forEach((item,idx)=>{
+        const _ul = item.closest("ul");
+        const _li = item.closest("li");
+        const _children = _ul.children;
+        for(let i=0; i<_children.length; i++){
+            const _c = _children[i];
+            if(_c === _li){
+                _c.classList.add("active");
+            }else{
+                _c.classList.remove("active");
+            }
+        }
+    })
+    _lnb.classList.add("open");
+    _gnb.classList.add("lnbopen");
+    switchCheckbox();
+    checkingBookmark();
+}
+function gnbmenuClose(){
+    const _gnb = document.querySelector("#gnb");
+    const _lnb = document.querySelector("#lnbMenuBox");
+    _lnb.classList.remove("open");
+    _gnb.classList.remove("lnbopen");
+}
+function switchCheckbox(){
+    const _menus = document.querySelectorAll(".lnbMenuListWrap li.active .lnbMenuList .menuParent");
+    const _switch = document.querySelector("#menuFold");
+    let switchChecked = true;
+    for(let i=0; i<_menus.length; i++){
+        const _m = _menus[i];
+        const openCheck = _m.classList.contains("open");
+        if(!openCheck){
+            switchChecked = false;
+            break;
+        }
+    }
+    _switch.checked = switchChecked;
+}
+function menuFoldingFn(){
+    const _this = event.currentTarget;
+    const checked = _this.checked;
+    const _menus = (checked)?document.querySelectorAll(".lnbMenuListWrap li.active .lnbMenuList .menuParent:not(.open)"):document.querySelectorAll(".lnbMenuListWrap li.active .lnbMenuList .menuParent.open");
+    _menus.forEach((m,i)=>{
+        m.classList.add("open");
+        const _input = m.querySelector(".menu-switch input");
+        if(checked){
+            m.classList.add("open");
+            _input.checked = false;
+        }else{
+            m.classList.remove("open");
+            _input.checked = true;
+        }
+    })
+}
+function bookmarkSettingFn(){
+    const _this = event.currentTarget;
+    const _menus = document.querySelectorAll(".lnbMenuListWrap li.active .lnbMenuList .menuParent");
+    const checked = _this.checked;
+    _menus.forEach((item,i)=>{
+        if(checked){
+            item.classList.add("bookmark");
+        }else{
+            item.classList.remove("bookmark");
+        }
+    })
+}
+function checkingBookmark(){
+    const _bookmark = document.querySelector("#bookmarkSet")
+    const _menus = document.querySelectorAll(".lnbMenuListWrap li.active .lnbMenuList .menuParent");
+    let checked = true;
+    for(let i=0; i<_menus.length; i++){
+        const item = _menus[i];
+        const bookChecked =  item.classList.contains("bookmark");
+        if(!bookChecked){
+            checked = false;
+            break;
+        }
+    }
+    _bookmark.checked = checked;
+
+}
 
 // init
 function init(){
     const _count = document.querySelector("#mainCount");
     mainSlider();
     getCounting(_count);
+
+    document.querySelectorAll(".menu-switch input").forEach((c,i)=>{
+        const ev = document.createEvent("HTMLEvents");
+        ev.initEvent("change",true,true);
+        c.dispatchEvent(ev);
+    })
 }
 
 window.onload = function(){
