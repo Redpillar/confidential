@@ -19,6 +19,11 @@
     <script type="text/javascript" src="../js/answer_common.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
     <script type="text/javascript" src="../js/main.js"></script>
+    <script>
+      window.onload = function(){
+        document.querySelector("#gnb .gnb-menu > ul > li > a").click();
+      }
+    </script>
   </head>
 
   <body>
@@ -28,10 +33,10 @@
               <input type="checkbox" id="icon" onchange="lnbMenuOpenFn()"><label for="icon"></label>
             </div>
             <div class="systemttl">
-              <label class="switch-bell">system<input type="checkbox" id="notice-bell" onchange="gnbBellChanged()" /><i></i></label>
+              <label class="switch-bell">system<input type="checkbox" id="notice-bell" checked onchange="gnbBellChanged()" /><i></i></label>
             </div>
             <!-- pop -->
-            <div id="noticePop" class="pop-notice">
+            <div id="noticePop" class="pop-notice open">
               <!-- top -->
               <div class="pop-notice-top-area">
                 <i class="icon-type-bell"></i>NOTICE<i class="icon-type-arr"></i>
@@ -120,15 +125,15 @@
           </div>
           <div class="gnb-menu">
             <ul>
-              <li><a href="#" onmouseover="gnbMenuMouseover()" menuname="application">Application</a></li>
-              <li><a href="#" onmouseover="gnbMenuMouseover()" menuname="enterprize">Enterprize</a></li>
-              <li><a href="#" onmouseover="gnbMenuMouseover()" menuname="tools">Tools</a></li>
-              <li><a href="#" onmouseover="gnbMenuMouseover()" menuname="lineitem">Line Item</a></li>
-              <li><a href="#" onmouseover="gnbMenuMouseover()" menuname="document">Document</a></li>
-              <li><a href="#" onmouseover="gnbMenuMouseover()" menuname="masterdata">Master Data</a></li>
-              <li><a href="#" onmouseover="gnbMenuMouseover()" menuname="document2">Document</a></li>
-              <li><a href="#" onmouseover="gnbMenuMouseover()" menuname="admin">Admin</a></li>
-              <li><a href="#" onmouseover="gnbMenuMouseover()" menuname="support">Support</a></li>
+              <li><a href="#" onclick="gnbMenuMouseover()" menuname="application">Application</a></li>
+              <li><a href="#" onclick="gnbMenuMouseover()" menuname="enterprize">Enterprize</a></li>
+              <li><a href="#" onclick="gnbMenuMouseover()" menuname="tools">Tools</a></li>
+              <li><a href="#" onclick="gnbMenuMouseover()" menuname="lineitem">Line Item</a></li>
+              <li><a href="#" onclick="gnbMenuMouseover()" menuname="document">Document</a></li>
+              <li><a href="#" onclick="gnbMenuMouseover()" menuname="masterdata">Master Data</a></li>
+              <li><a href="#" onclick="gnbMenuMouseover()" menuname="document2">Document</a></li>
+              <li><a href="#" onclick="gnbMenuMouseover()" menuname="admin">Admin</a></li>
+              <li><a href="#" onclick="gnbMenuMouseover()" menuname="support">Support</a></li>
             </ul>
           </div>
         <div class="right-item">
@@ -4792,6 +4797,7 @@
             </li>
           </ul>
         </div>
+        <span class="thumb" onmousedown="splitFn()"></span>
       </div>
       <div id="footer">
           <span>Copyright © SAMSUNG DISPLAY All rights reserved.</span>

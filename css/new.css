@@ -738,7 +738,7 @@ ul,li{list-style:none; }
     --font: '';
   }
 /* GNB */
-#gnb {position:fixed; top:0; left:0; right:0; z-index:110; display: flex; justify-content: space-between; align-items: center; height:50px; border-bottom:1px solid #E2E2E2; background:#fff;}
+#gnb {position:fixed; top:0; left:0; right:0; z-index:120; display: flex; justify-content: space-between; align-items: center; height:50px; border-bottom:1px solid #E2E2E2; background:#fff;}
 
 #gnb .menu-wrap {display:flex; align-items:center; width: 50px; height: 100%; border-right: 0px solid var(--c-gray5);}
 #gnb .menu-wrap input[id="icon"] {display:none;} 
@@ -957,7 +957,7 @@ a.btn:after {
 
 
 /* lnbMenuBox */
-#lnbMenuBox{position:fixed; top:50px; left:-100%; bottom:0; z-index:110; width:100%; transition:left ease 0.5s; background:url(../img/bg_lnbMenuBox.svg)}
+#lnbMenuBox{position:fixed; top:50px; left:-100%; bottom:0; z-index:110; width:100%; background:url(../img/bg_lnbMenuBox.svg)}
 #lnbMenuBox.open{left:0;}
 .lnbMenuLayout{display:flex; justify-content:flex-start; align-items:stretch; height:100%; /*max-height:695px;*/ background:#fff;}
 .lnbMenuLayout > .l{flex:1; overflow:auto;}
@@ -1047,11 +1047,15 @@ a.btn:after {
 
 
 /* 즐겨찾기 */
-#bookmarkPop{position:fixed; top:50px; left:-280px; bottom:0; z-index:100; display:flex; flex-direction:column; width:280px; transition:left ease 0.3s; background:#fff;}
-#bookmarkPop.open{left:0;}
+#bookmarkPop{position:fixed; top:50px; left:0; bottom:0; z-index:100; display:flex; flex-direction:column; width:280px; transform:translate(-100%,0); transition:transform ease 0.3s; background:#fff;}
+#bookmarkPop.open{ transform:translate(0,0);}
 .bookmarkSearch{height:52px; margin:0 20px; border-bottom:1px solid #E0E0E0;}
 .bookmarkList{flex:1; overflow:auto;}
 .bookmarkList > ul{margin:0 20px;}
 .bookmarkList > ul > li{padding:0 0 20px 0;}
 .bookmarkList > ul > li + li{border-top:1px solid #E0E0E0;}
-
+#bookmarkPop > .thumb{position:absolute; top:0; right:0; width:15px; height:100%; opacity:0.2; background:#fff;}
+#bookmarkPop > .thumb:hover, #bookmarkPop > .thumb:active{cursor:ew-resize;opacity:1;}
+#bookmarkPop > .thumb:after,#bookmarkPop > .thumb:before{content:""; position:absolute; top:50%; left:50%; width:4px; height:4px; border-radius:100%; transform:translate(-50%,-50%); background:#ddd;}
+#bookmarkPop > .thumb:after{margin-top:-5px;}
+#bookmarkPop > .thumb:before{margin-top:5px;}

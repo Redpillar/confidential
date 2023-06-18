@@ -73,10 +73,14 @@ function getCounting(el){
 
 function lnbMenuOpenFn(){
     const _this = event.currentTarget;
-    const checked = _this.checked;
     const _bookmarkPop = document.querySelector("#bookmarkPop");
+    const _gnb = document.querySelector("#gnb");
+    const _gnbMenu = document.querySelector("#lnbMenuBox");
+    const checked = _this.checked;
     if(checked){
         _bookmarkPop.classList.add("open");
+        _gnb.classList.remove("lnbopen");
+        _gnbMenu.classList.remove("open");
     }else{
         _bookmarkPop.classList.remove("open");
     }
@@ -99,6 +103,8 @@ function gnbMenuMouseover(){
     const _name = document.querySelectorAll("[menuname="+name+"]");
     const _gnb = document.querySelector("#gnb");
     const _lnb = document.querySelector("#lnbMenuBox");
+    const _bookmark = document.querySelector("#bookmarkPop");
+    const _bookmarkInput = _gnb.querySelector("#icon");
     _name.forEach((item,idx)=>{
         const _ul = item.closest("ul");
         const _li = item.closest("li");
@@ -107,6 +113,8 @@ function gnbMenuMouseover(){
             const _c = _children[i];
             if(_c === _li){
                 _c.classList.add("active");
+                _bookmark.classList.remove("open");
+                _bookmarkInput.checked = false;
             }else{
                 _c.classList.remove("active");
             }
@@ -185,6 +193,35 @@ function checkingBookmark(){
     }
     _bookmark.checked = checked;
 
+}
+
+function splitFn(){
+    event.preventDefault();
+    if(event.stopPropagation){
+        event.stopPropagation();
+    }else{
+        event.cancleBubble = true;
+    }
+    const _this = event.currentTarget;
+    const _box = document.querySelector("#bookmarkPop");
+    const min = 200;
+    const winMove = ()=>{
+        const diff = event.pageX - _this.sx;
+        const calc = (min >= _this.w + diff)?min:_this.w + diff;
+        console.log("diff : ",diff);
+        console.log("calc : ",calc);
+        _box.style.width = calc + "px";
+    }
+    const winUp = ()=>{
+        window.removeEventListener("mousemove",winMove);
+        window.removeEventListener("mouseup",winUp);
+    }
+    _this.sx = event.pageX;
+    _this.w = _box.clientWidth;
+    console.log("event.pageX : ",event.pageX)
+    console.log("_box.clientWidth : ",_box.clientWidth)
+    window.addEventListener("mousemove",winMove);
+    window.addEventListener("mouseup",winUp);
 }
 
 // init
