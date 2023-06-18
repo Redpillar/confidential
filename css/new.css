@@ -965,8 +965,8 @@ a.btn:after {
 .lnbMenuLayout > .r{width:415px; overflow:auto;}
 
 .lnbMenuListWrap{min-width:1200px;}
-.lnbMenuListWrap > ul > li{display:none;}
-.lnbMenuListWrap > ul > li.active{display:block;}
+/* .lnbMenuListWrap > ul > li{display:none;} */
+/* .lnbMenuListWrap > ul > li.active{display:block;} */
 .lnbMenuListWrap.bookmark .lnbMenuList > ul > li + li{margin-left:}
 
 .lnbMenuList{padding:0 85px 15px;}
