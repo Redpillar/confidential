@@ -961,7 +961,7 @@ a.btn:after {
 /* lnbMenuBox */
 #lnbMenuBox{position:fixed; top:50px; left:-100%; bottom:0; z-index:110; width:100%; background: rgba(0,0,0,0.4) url(../img/bg_lnbMenuBox.svg)}
 #lnbMenuBox.open{left:0;}
-.lnbMenuLayout{display:flex; justify-content:flex-start; align-items:stretch; height:80%; /*max-height:695px;*/ background:#fff;}
+.lnbMenuLayout{display:flex; justify-content:flex-start; align-items:stretch; height:80%;/*max-height:695px;*/ background:#fff;}
 .lnbMenuLayout > .l{flex:1; overflow:auto;}
 .lnbMenuLayout > .l + .r{border-left:1px solid #E0E0E0;}
 .lnbMenuLayout > .r{width:415px; overflow:auto;}

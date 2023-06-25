@@ -224,8 +224,6 @@ function splitFn(){
     const winMove = ()=>{
         const diff = event.pageX - _this.sx;
         const calc = (min >= _this.w + diff)?min:_this.w + diff;
-        console.log("diff : ",diff);
-        console.log("calc : ",calc);
         _box.style.width = calc + "px";
     }
     const winUp = ()=>{
@@ -242,7 +240,6 @@ function fieldTextChanged(){
     const _this = event.currentTarget;
     const _label = _this.closest("label");
     const len = _this.value.length;
-    console.log("len : ",len)
     if(len > 0){
         _label.classList.add("resetBt_active");
     }else{
@@ -256,6 +253,7 @@ function resetTextField(){
     const _input = _label.querySelector("input");
     _label.classList.remove("resetBt_active");
     _input.value = "";
+    _input.focus();
 
 }
 
@@ -274,8 +272,6 @@ function setPopLabel(){
             }else{
                 _pop.classList.remove("top");
             }
-            console.log("max : ",max);
-
             _pops.forEach((p,i)=>{
                 if(p === _pop){
                     p.classList.add("open");
