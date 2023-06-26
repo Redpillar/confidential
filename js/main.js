@@ -4,37 +4,79 @@
 */
 
 // main slider
-function mainSlider(){
-    let len = document.querySelectorAll(".main-visual-slider .slider li").length;
-    document.querySelector(".main-visual-slider .slider ul").style.left = "0";
-    len = (len > 9)?len:"0"+len;
-    document.querySelector(".main-visual-both .num .to").innerText = len;
-    document.querySelector(".main-visual-both .num .cu").innerText = "01";
-    const _visualBtn = document.querySelectorAll(".main-visual-btn");
+function eventMainSlider(){
+    const _slider = document.querySelector(".main-visual-slider");
+    const _countBox = _slider.querySelector(".main-visual-both .num");
+    const _visualBtn = _slider.querySelectorAll(".main-visual-btn");
     _visualBtn.forEach((b,i)=>{
       b.addEventListener("click",function(){
-        const _slider = document.querySelector(".main-visual-slider .slider > ul")
+        if(_slider.movePoint !== -1){
+            return 
+        }
         const _this = event.currentTarget;
-        const checked = _this.classList.contains("l");
-        const currentPosition = (_slider.style.left === "")?0:Number(_slider.style.left.match(/\-?\d+/g));
-        const max = (document.querySelectorAll(".main-visual-slider .slider li").length - 1) * -100;
-        let variableNum = -100;
-        if(checked) variableNum = 100;
-        const calc = currentPosition + variableNum;
-        const apply = (calc > 0)?max:(calc < max)?0:calc;
-        const num = (Math.abs(apply) * 0.01) + 1;
-        const applyNum = (num > 9)?num:"0"+num;
-        _slider.style.left = apply + "%";
-        document.querySelector(".main-visual-both .num .cu").innerText = applyNum;
+        const checked =  _this.classList.contains("r");
+        let idx = (checked)?Number(_countBox.querySelector(".cu").innerText) + 1:Number(_countBox.querySelector(".cu").innerText) - 1;
+        idx = (idx < 1)?_slider.box.children.length:(idx > _slider.box.children.length)?1:idx;
+        _slider.movePoint = (checked)?-100:0;
+        _slider.count ++;
+        if(!checked){
+            _slider.box.insertBefore(_slider.box.children[_slider.box.children.length - 1],_slider.box.children[0]);
+            _slider.box.style.left = "-100%";
+        }
+        _slider.currentLeft = (_slider.box.style.left === "")?0:Number(_slider.box.style.left.match(/\-?\d+\.\d+|\-?\d+/g)[0]);
+        const varNum = (!checked)?1:-1;
+        _slider.stopOne = (100 / _slider.frameLen) * varNum;
+
+        if(_slider.timer) clearInterval(_slider.timer);
+        _slider.timer = setInterval(()=>{
+            _slider.currentLeft += Number(_slider.stopOne);
+
+
+            if((_slider.movePoint >= _slider.currentLeft && checked) || (_slider.movePoint <= _slider.currentLeft && !checked)) _slider.currentLeft = _slider.movePoint;
+            _slider.box.style.left = _slider.currentLeft + "%"
+            if((_slider.movePoint >= _slider.currentLeft && checked) || (_slider.movePoint <= _slider.currentLeft && !checked)){
+                clearInterval(_slider.timer);
+                if(checked){
+                    _slider.box.appendChild(_slider.box.children[0]);
+                    _slider.box.style.left = "0";
+                }
+                _countBox.querySelector(".cu").innerText = (Number(idx) > 9)?idx:"0"+idx;
+                _slider.movePoint = -1;
+            }
+        },_slider.frame)
       })
     })
+}
+function settingMainSlider(){
+    const _slider = document.querySelector(".main-visual-slider");
+    const _countBox = _slider.querySelector(".main-visual-both .num");
+    _slider.source = [];
+    _slider.box = _slider.querySelector(".slider > ul");
+    const _li = _slider.querySelectorAll(".slider > ul > li");
+    _slider.time = 500;
+    _slider.frame = 10;
+    _slider.frameLen = _slider.time / _slider.frame;
+    _slider.startLeft = -1;                                // 슬라이드 시 이동해야 할 값
+    _slider.targetLeft = -1;                                // 슬라이드 시 이동해야 할 값
+    _slider.movePoint = -1;                                // 클릭 시 뱡향을 알려주는 값
+    _slider.agoMovePoint = -1;                                // 이전 클릭의 뱡향을 알려주는 값
+    _slider.saveMovePint = 0;                            // 같은 방향으로 클릭 시 계속 쌓이는 값
+    _slider.startNum = 1;
+    _slider.count = 0;
+    _li.forEach((_l,i)=>{
+        const s = _l.innerHTML;
+        _slider.source.push(s);
+    })
+    _countBox.querySelector(".to").innerText = (_li.length > 9)?_li.length:"0"+_li.length;
+    _countBox.querySelector(".cu").innerText = "01";
+    eventMainSlider();
 }
 function mainSliderAuto(){
     const _slider = document.querySelector(".main-visual-slider");
     const _bt = document.querySelector(".main-visual-btn.r");
-    _slider.speed = 3000;
-    if(_slider.timer) clearInterval(_slider.timer);
-    _slider.timer = setInterval(()=>{
+    _slider.speed = 2000;
+    if(_slider.autotimer) clearInterval(_slider.autotimer);
+    _slider.autotimer = setInterval(()=>{
         _bt.click();   
     },_slider.speed)
 }
@@ -293,9 +335,8 @@ function setPopLabel(){
 // init
 function init(){
     const _count = document.querySelector("#mainCount");
-    mainSlider();
     getCounting(_count);
-
+    
     document.querySelectorAll(".menu-switch input").forEach((c,i)=>{
         const ev = document.createEvent("HTMLEvents");
         ev.initEvent("change",true,true);
@@ -303,6 +344,8 @@ function init(){
     })
     setPopLabel();
     mainSliderAuto();
+    
+    settingMainSlider();
 }
 
 window.onload = function(){
