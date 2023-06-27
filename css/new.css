@@ -756,10 +756,11 @@ ul,li{list-style:none; }
 
 #gnb .gnb-menu {display:inline-block; height:100%; width:960px;min-width:960px; position: relative;}
 #gnb .gnb-menu > ul {display: flex; justify-content: space-between; align-items: center; height:100%; }
-#gnb .gnb-menu > ul > li {display:inline-block; float:left;word-wrap:normal; height: 100%;  box-sizing: border-box;text-transform:uppercase ;font-size:16px;line-height:50px;}
+#gnb .gnb-menu > ul > li {display:inline-block; padding:0 10px; word-wrap:normal; height: 100%;  box-sizing: border-box;text-transform:uppercase ;font-size:16px;line-height:50px;}
 /* #gnb .gnb-menu > ul > li.active > a {color: var(--c-blue3);} */
 #gnb .gnb-menu > ul > li > a {font-family: var(--font); font-size:16px; font-weight: bold; color: var(--c-gray10); text-decoration: none; }
-#gnb .gnb-menu > ul > li:hover > a{color: var(--c-blue3);}
+#gnb .gnb-menu > ul > li:hover{color:#fff; background-color: var(--c-blue3);}
+#gnb .gnb-menu > ul > li:hover > a{color:#fff; background-color: var(--c-blue3);}
 #gnb.lnbopen .gnb-menu > ul > li.active > a {color: var(--c-blue3);}
 
 #gnb .systemttl {display:inline-block; width:120px ;font-family: var(--font);text-transform:uppercase ;font-size:20px;font-weight:bold;}
@@ -786,7 +787,8 @@ ul,li{list-style:none; }
 .main-mid .mid-left > ul{position:relative; left:0; width:100%; white-space:nowrap; font-size:0; transition:left ease 0.5s;}
 .main-mid .mid-left > ul.noani{transition:none;}
 .main-mid .mid-left > ul > li{display:inline-block; width:100%; height:100%;}
-.main-mid .mid-right{display:flex; justify-content:space-between; width:693px; font-size:0;}
+.main-mid .mid-right{display:flex; justify-content:flex-end; width:700px; font-size:0;}
+.main-mid .mid-right a + a{margin-left:5px;}
 .infog-1 {display:inline-block;font-family: var(--font);color:#555555;text-transform:uppercase ;font-size:28px;line-height:px;font-weight:700;padding-right:45px;}
 .infog-2 {display:inline-block;font-family: var(--font);color:#000000;text-transform:uppercase ;font-size:48px;line-height:px;font-weight:700;padding-right:10px;}
 .infog-3 {display:inline-block;font-family: var(--font);color:#555555;text-transform:uppercase ;font-size:26px;line-height:px;font-weight:700;margin-top:20px;}
@@ -878,7 +880,7 @@ span.ico-view {display:inline-block;padding:0 0 0 40px; height:24x; font-size:12
 /**합친부분 **/
 .brd-1-bttm {border-bottom:1px solid #D3D2D8;}
 .btn-seeall{clear:both;positon:relative; margin:0 auto; text-align:center;}
-.btn-seeall .btn {margin-top:15px;padding-right: 20px; margin-bottom:20px;background:url(../img/icon_seeall.png) no-repeat right center;}
+.btn-seeall .btn {margin-top:15px;padding-right: 20px; margin-bottom:20px;background:url(../img/icon_seeall.png) no-repeat calc(100% - 2px) center;}
 
 a.btn {
 	font-family: var(--font);
