@@ -16,6 +16,7 @@ function eventMainSlider(){
         const _this = event.currentTarget;
         const checked =  _this.classList.contains("r");
         let idx = (checked)?Number(_countBox.querySelector(".cu").innerText) + 1:Number(_countBox.querySelector(".cu").innerText) - 1;
+        clearInterval(_slider.autotimer);
         idx = (idx < 1)?_slider.box.children.length:(idx > _slider.box.children.length)?1:idx;
         _slider.movePoint = (checked)?-100:0;
         _slider.count ++;
@@ -42,6 +43,7 @@ function eventMainSlider(){
                 }
                 _countBox.querySelector(".cu").innerText = (Number(idx) > 9)?idx:"0"+idx;
                 _slider.movePoint = -1;
+                mainSliderAuto();
             }
         },_slider.frame)
       })
