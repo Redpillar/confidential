@@ -16,7 +16,7 @@ function eventMainSlider(){
         const _this = event.currentTarget;
         const checked =  _this.classList.contains("r");
         let idx = (checked)?Number(_countBox.querySelector(".cu").innerText) + 1:Number(_countBox.querySelector(".cu").innerText) - 1;
-        clearInterval(_slider.autotimer);
+        if(!window.triggerBtn) clearInterval(_slider.autotimer);
         idx = (idx < 1)?_slider.box.children.length:(idx > _slider.box.children.length)?1:idx;
         _slider.movePoint = (checked)?-100:0;
         _slider.count ++;
@@ -43,7 +43,8 @@ function eventMainSlider(){
                 }
                 _countBox.querySelector(".cu").innerText = (Number(idx) > 9)?idx:"0"+idx;
                 _slider.movePoint = -1;
-                mainSliderAuto();
+                if(!window.triggerBtn) mainSliderAuto();
+                window.triggerBtn = false;
             }
         },_slider.frame)
       })
@@ -79,8 +80,30 @@ function mainSliderAuto(){
     _slider.speed = 2000;
     if(_slider.autotimer) clearInterval(_slider.autotimer);
     _slider.autotimer = setInterval(()=>{
-        _bt.click();   
+        window.triggerBtn = true;
+        _bt.click();
     },_slider.speed)
+}
+
+
+
+function mainMidSlid(){
+    const _slider = document.querySelector(".main-mid-wrap .main-mid .mid-left > ul");
+    const time = 2000;
+    if(_slider.timer2) clearTimeout(_slider.timer2);
+    _slider.timer = setInterval(()=>{
+        _slider.style.left = "-100%";
+        setTimeout(()=>{
+            _slider.classList.add("noani")
+        },500)
+        setTimeout(()=>{
+            _slider.appendChild(_slider.children[0]);
+            _slider.style.left = "0%";
+        },(time / 2))
+        setTimeout(()=>{
+            _slider.classList.remove("noani")
+        },((time / 2) + 100))
+    },time)
 }
 // gnb notice
 
@@ -334,6 +357,8 @@ function setPopLabel(){
     })
 }
 
+
+
 // init
 function init(){
     const _count = document.querySelector("#mainCount");
@@ -348,6 +373,9 @@ function init(){
     mainSliderAuto();
     
     settingMainSlider();
+
+
+    mainMidSlid();
 }
 
 window.onload = function(){
