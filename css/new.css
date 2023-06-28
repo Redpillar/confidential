@@ -789,9 +789,9 @@ ul,li{list-style:none; }
 .main-mid .mid-left > ul > li{display:inline-block; width:100%; height:100%;}
 .main-mid .mid-right{display:flex; justify-content:flex-end; width:700px; font-size:0;}
 .main-mid .mid-right a + a{margin-left:5px;}
-.infog-1 {display:inline-block;font-family: var(--font);color:#555555;text-transform:uppercase ;font-size:28px;line-height:px;font-weight:700;padding-right:45px;}
-.infog-2 {display:inline-block;font-family: var(--font);color:#000000;text-transform:uppercase ;font-size:48px;line-height:px;font-weight:700;padding-right:10px;}
-.infog-3 {display:inline-block;font-family: var(--font);color:#555555;text-transform:uppercase ;font-size:26px;line-height:px;font-weight:700;margin-top:20px;}
+.infog-1 {display:inline-block;font-family:"open sans","opensans","맑은고딕","Malgun Gothic","malgun gothic";color:#555555;text-transform:uppercase ;font-size:28px;line-height:px;font-weight:700;padding-right:45px;}
+.infog-2 {display:inline-block;font-family:"open sans","opensans","맑은고딕","Malgun Gothic","malgun gothic";color:#000000;text-transform:uppercase ;font-size:48px;line-height:px;font-weight:700;padding-right:10px;}
+.infog-3 {display:inline-block;font-family:"open sans","opensans","맑은고딕","Malgun Gothic","malgun gothic";color:#555555;text-transform:uppercase ;font-size:26px;line-height:px;font-weight:700;margin-top:20px;}
 
 .main-bttm {display:block;display:block;margin:0 auto;width:1200px;padding-top:30px;margin-bottom:140px;}
 
@@ -801,8 +801,8 @@ ul,li{list-style:none; }
 .btn_main:hover{color:#ccc; background-color:#616e7d;}
 .btn_main.disabled{color:#ccc; cursor:default; background-color:#fff;}
 
-
-.btn_gray.cta{font-family: var(--font);padding:0 30px 0 10px; height:40px; font-size:14px; text-transform:uppercase ;border:none;border-radius:0;background:#000000 url(../img/up.png) no-repeat right 20px center;}
+/* 수정 */
+.btn_gray.cta{font-family: var(--font);padding:0 20px 0 0px; height:40px; font-size:14px; text-transform:uppercase ;border:none;border-radius:0;background:#000000 url(../img/up.png) no-repeat right 10px center;}
 .btn_gray.cta .btn_gIcon + .btn_gTxt{font-size:14px;font-weight:700;}
 .btn_gray.cta .btn_gTxt { font-size:14px;font-weight:700;line-height:40px;}
 
@@ -811,20 +811,22 @@ ul,li{list-style:none; }
 .btn_gTxt{display:inline-block; height:100%; font-family:/*"open sans","opensans",*/"맑은고딕","Malgun Gothic","malgun gothic"; font-size:11px; color:#fff; line-height:40px;}
 .btn_gray .btn_gTxt{text-shadow:0 1px 2px #000;}
 
-.btn_cta2{display:inline-block; padding:0 40px 0 20px; height:40px; font-size:14px; text-transform:uppercase ;text-decoration:none; line-height:30px; color:#999; border:1px solid #000000;font-family:"open sans","opensans","맑은고딕","Malgun Gothic","malgun gothic";line-height:40px;background:url(../img/icon-blk.png) no-repeat right 20px center;}
+/* 수정 */
+.btn_cta2{display:inline-block; padding:0 35px 0 15px; height:40px; font-size:14px; text-transform:uppercase ;text-decoration:none; line-height:30px; color:#999; border:1px solid #000000;font-family:"open sans","opensans","맑은고딕","Malgun Gothic","malgun gothic";line-height:40px;background:url(../img/icon-blk.png) no-repeat right 5px center;}
 .btn_cta2:hover{color:#000000; }
 .btn_cta2.disabled{color:#ccc; cursor:default; }
 
 /**합친부분 **/
 /* BNtype-03 */
-.BNtype-03 {display:inline-block;width:100%;overflow:hidden;position:relative;height:auto !important;}
-.BNtype-03 ul[class*="item"]{position:relative;left:0;overflow:hidden;min-width:100%}
+.BNtype-03 {display:inline-block;width:100%;position:relative;height:auto !important;}
+.BNtype-03 ul[class*="item"]{position:relative;left:0;min-width:100%}
 .BNtype-03 ul[class*="item"] li{position: static;}
 .BNtype-03 ul.item1{width:100%;font-family: var(--font);margin-bottom:20px;}
-.BNtype-03 ul.item1 li{width:285px; background:#bfd5e8; height:342px; float:left; margin-right:18px; position:relative;border:1px solid #E0E0E0;cursor:pointer;}
+.BNtype-03 ul.item1 li{top:0; width:285px; background:#bfd5e8; height:342px; float:left; margin-right:18px; position:relative;border:1px solid #E0E0E0;cursor:pointer;box-shadow:0 0 10px 2px rgba(0,0,0,0); transition:box-shadow ease 0.5s, top ease 0.5s;}
 .BNtype-03 ul.item1 li:last-child{margin-right:0px;}
 .BNtype-03 ul.item1 li .thum{width:100%;height:210px;overflow:hidden;background-color:#bfd5e8/*background:url(../img/prm_main/bg_thum01.png) #bfd5e8 no-repeat 0 0*/;}
 .BNtype-03 ul.item1 li div.inner-box{padding:15px 20px 20px 15px; background:#ffffff; height:130px;overflow: hidden; word-wrap:break-word;text-overflow:ellipsis;}
+.BNtype-03 ul.item1 li:hover{top: -5px; box-shadow:0 0 15px 5px rgba(0,0,0,0.15)}
 
 .BNtype-03 ul.item1 li div.inner-box2{padding:65px 30px ; background:#bfd5e8; height:244px;overflow: hidden; word-wrap:break-word;text-overflow:ellipsis;}
 .BNtype-03 ul.item1 li h1.tit{font-size:28px; line-height:30px;color:#0057a4;width:227px;height:63px;overflow: hidden; /*white-space:pre;*/text-overflow:ellipsis;word-wrap:break-word;}
@@ -837,11 +839,15 @@ ul,li{list-style:none; }
 .BNtype-03 ul.item1 li span.btn:hover{opacity:0.85; background:#0057a4;color:#fff;}
 .BNtype-03 a.thum-hover:hover span.btn-link{opacity:0.85; background:#0057a4;color:#fff;}
 .BNtype-03 a.thum-hover:hover span.btn{opacity:0.85; background:#0057a4;color:#fff;}
-.BNtype-03 a.thum-hover:hover span.link-icon {opacity:0.85; background:#0057a4 url(../img/link-hover.png) no-repeat center;}
+.BNtype-03 a.thum-hover:hover span.link-icon {opacity:0.85; background: url(../img/link-hover.png) no-repeat center;}
 .BNtype-03 ul.item1 li button[type=button],
 .BNtype-03 ul.item1 li span.link-icon{display:block; position:absolute; right:0;width:50px; height:50px ;background: url(../img/link-normal.png) no-repeat center;}
 .BNtype-03 ul.item1 li span.link-icon {-moz-transition:background-color ease-in-out .3s;-o-transition:background-color ease-in-out .3s;-webkit-transition:background-color ease-in-out .3s;transition:background-color ease-in-out .3s;}
 .BNtype-03 ul.item1 li span.link-icon:hover {opacity:0.85; background:#0057a4 url(../img/link-hover.png) no-repeat center;}
+
+.thum-hover{position:relative;}
+.thum-hover > .ViewPage{position:absolute; top:0; left:0; right:0; bottom:0; display:flex; align-items:center; justify-content:center; font-size:18px; color:#fff; font-weight:600; opacity:0; transition:opacity ease 0.3s; background:rgba(0, 113, 191, 0.9);}
+li:hover .thum-hover > .ViewPage{opacity:1;}
 /**합친부분 **/
 
 
@@ -951,7 +957,8 @@ a.btn:after {
 .pop-notice.open{display:flex;}
 
 /** 합친부분 **/
-.pop-notice-top-area{position:relative; display:flex; align-items:center; height:62px; padding:6px 0 0 0; margin:0 18px 0 31px; font-family: 'Noto Sans KR'; font-style: normal; font-weight: 400; font-size: 22px; border-bottom:1px solid #D3D2D8;}
+/* 수정 */
+.pop-notice-top-area{position:relative; display:flex; align-items:center; height:62px; padding:6px 0 0 0; margin:0 18px 0 31px; font-family:"open sans","opensans","맑은고딕","Malgun Gothic","malgun gothic";; font-style: normal; font-weight: 400; font-size: 22px; border-bottom:1px solid #D3D2D8;}
 
 .pop-notice-top-area .icon-type-bell{top:0px; margin-right:8px;}
 .pop-notice-top-area .icon-type-arr{top:2px; margin-left:8px;}
