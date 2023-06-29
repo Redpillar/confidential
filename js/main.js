@@ -173,8 +173,8 @@ function menuChangedEv(){
 }
 function gnbMenuMouseover(){
     const _this = event.currentTarget;
-    const name = _this.getAttribute("menuname");
-    const _name = document.querySelectorAll("[menuname="+name+"]");
+    // const name = _this.getAttribute("menuname");
+    // const _name = document.querySelectorAll("[menuname="+name+"]");
     const _gnb = document.querySelector("#gnb");
     const _lnb = document.querySelector("#lnbMenuBox");
     const _bookmark = document.querySelector("#bookmarkPop");
@@ -355,6 +355,13 @@ function setPopLabel(){
             })
         })
     })
+}
+
+function menuoutEv(){
+    const _this = event.currentTarget;
+    const _lnb = document.querySelector("#lnbMenuBox");
+    const both = _this.getBoundingClientRect().bottom;
+    if(event.pageY > both) _lnb.classList.remove("open");
 }
 
 

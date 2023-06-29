@@ -117,7 +117,7 @@ document.getElementById("defaultOpen").click();
 .btn_tooltip .pt_wrap {visibility: hidden;}	
 .pt_wrap{position:absolute; top:100%; right:0; z-index:10; display:none; width:187px; padding:37px 7px 0 0; margin:-20px 0 0 0;}
 
-.btn_tooltip:hover .pt_wrap{visibility: visible;cursor: pointer;}
+.btn_tooltip:hover .pt_wrap{display:block; visibility: visible;cursor: pointer;}
 #sub_wrap {background:#ffffff;}		
 </style>
 </head>
@@ -147,7 +147,8 @@ document.getElementById("defaultOpen").click();
 				<div class="subTop_rightbox fl_r">
 					<a href="javascript:;" class="home">Home</a>  >  Solution  >  PreDS Mecha</a>  >  <span class="tc1">Module</span>
 				
-				    <a class="btn_tooltip"><span class="btn_gTxt"><i class="fa fa-info-circle"></i>해석담당자</span>                      
+				    <div class="btn_tooltip">
+						<span class="btn_gTxt"><i class="fa fa-info-circle"></i>해석담당자</span>                      
 					
 						<div class="pt_wrap">
 							<div class="pt_wrapCon">
@@ -156,7 +157,7 @@ document.getElementById("defaultOpen").click();
 							</div>
 							<a href="javascript:;" class="pt_btn">Manual.pdf</a>
 						</div>
-					</a> 
+					</div> 
 				</div>
 			</div>
 			<!-- // top -->
